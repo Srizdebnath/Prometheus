@@ -1,3 +1,4 @@
+use std::time::{Instant, Duration};
 use crate::board::{Board, Move};
 use crate::movegen::{MoveList, generate_moves};
 use crate::evaluation::evaluate;
@@ -9,6 +10,9 @@ pub const MATE_SCORE: i32 = 29000;
 pub struct Search {
     pub nodes: u64,
     pub tt: TranspositionTable,
+    pub start_time: Instant,
+    pub time_limit: Duration,
+    pub abort_search: bool,
 }
 
 impl Search {
@@ -16,25 +20,51 @@ impl Search {
         Search { 
             nodes: 0,
             tt: TranspositionTable::new(16), // 16 MB TT
+            start_time: Instant::now(),
+            time_limit: Duration::from_secs(u64::MAX),
+            abort_search: false,
+        }
+    }
+
+    fn check_time(&mut self) {
+        if self.nodes & 2047 == 0 {
+            if self.start_time.elapsed() >= self.time_limit {
+                self.abort_search = true;
+            }
         }
     }
 
     pub fn search(&mut self, board: &mut Board, depth: u8) -> (i32, Option<Move>) {
         self.nodes = 0;
+        self.start_time = Instant::now();
+        self.time_limit = Duration::from_secs(u64::MAX);
+        self.abort_search = false;
+        
         let mut best_move = None;
         let score = self.alpha_beta(board, depth, 0, -INFINITY, INFINITY, &mut best_move);
         (score, best_move)
     }
 
-    pub fn iterative_deepening(&mut self, board: &mut Board, max_depth: u8) -> (i32, Option<Move>) {
+    pub fn iterative_deepening(&mut self, board: &mut Board, max_depth: u8, time_limit: Duration) -> (i32, Option<Move>) {
+        self.nodes = 0;
+        self.start_time = Instant::now();
+        self.time_limit = time_limit;
+        self.abort_search = false;
+        
         let mut best_move = None;
         let mut best_score = 0;
         
         for d in 1..=max_depth {
-            let (score, m) = self.search(board, d);
+            let mut current_best = None;
+            let score = self.alpha_beta(board, d, 0, -INFINITY, INFINITY, &mut current_best);
+            
+            if self.abort_search && d > 1 {
+                break;
+            }
+
             best_score = score;
-            if m.is_some() {
-                best_move = m;
+            if current_best.is_some() {
+                best_move = current_best;
             }
             
             // if mate found, we can break early
@@ -90,6 +120,11 @@ impl Search {
         beta: i32, 
         best_move_out: &mut Option<Move>
     ) -> i32 {
+        self.check_time();
+        if self.abort_search {
+            return 0;
+        }
+
         let alpha_orig = alpha;
 
         let mut tt_move = None;
@@ -157,10 +192,23 @@ impl Search {
             if let Some(undo) = board.make_move(m) {
                 legal_moves += 1;
                 
-                let mut dummy = None;
-                let score = -self.alpha_beta(board, depth - 1, ply + 1, -beta, -alpha, &mut dummy);
+                let score = if legal_moves == 1 {
+                    let mut dummy = None;
+                    -self.alpha_beta(board, depth - 1, ply + 1, -beta, -alpha, &mut dummy)
+                } else {
+                    let mut dummy = None;
+                    let mut s = -self.alpha_beta(board, depth - 1, ply + 1, -alpha - 1, -alpha, &mut dummy);
+                    if s > alpha && s < beta {
+                        s = -self.alpha_beta(board, depth - 1, ply + 1, -beta, -alpha, &mut dummy);
+                    }
+                    s
+                };
                 
                 board.unmake_move(m, undo);
+                
+                if self.abort_search {
+                    return 0;
+                }
 
                 if score > best_score {
                     best_score = score;
