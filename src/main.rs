@@ -1,1 +1,4 @@
-fn main() { println!("Prometheus Chess Engine initialized."); }
+fn main() {
+    // Start the UCI loop
+    prometheus::uci::uci_loop();
+}

@@ -163,6 +163,57 @@ impl Board {
         board
     }
 
+    pub fn from_fen(fen: &str) -> Option<Self> {
+        let mut board = Board::empty();
+        let parts: Vec<&str> = fen.split_whitespace().collect();
+        if parts.len() < 4 { return None; }
+
+        let mut rank = 7i32;
+        let mut file = 0i32;
+        for c in parts[0].chars() {
+            if c == '/' {
+                rank -= 1;
+                file = 0;
+            } else if c.is_digit(10) {
+                file += c.to_digit(10).unwrap() as i32;
+            } else {
+                let color = if c.is_uppercase() { Color::White } else { Color::Black };
+                let pt = match c.to_ascii_lowercase() {
+                    'p' => PieceType::Pawn,
+                    'n' => PieceType::Knight,
+                    'b' => PieceType::Bishop,
+                    'r' => PieceType::Rook,
+                    'q' => PieceType::Queen,
+                    'k' => PieceType::King,
+                    _ => return None,
+                };
+                let sq = Square::new((rank * 8 + file) as u8);
+                board.add_piece(pt, color, sq);
+                file += 1;
+            }
+        }
+
+        board.side_to_move = if parts[1] == "w" { Color::White } else { Color::Black };
+
+        board.castling_rights = 0;
+        if parts[2].contains('K') { board.castling_rights |= 1; }
+        if parts[2].contains('Q') { board.castling_rights |= 2; }
+        if parts[2].contains('k') { board.castling_rights |= 4; }
+        if parts[2].contains('q') { board.castling_rights |= 8; }
+
+        if parts[3] != "-" {
+            let f = parts[3].chars().nth(0)? as u8 - b'a';
+            let r = parts[3].chars().nth(1)? as u8 - b'1';
+            board.en_passant = Some(Square::new(r * 8 + f));
+        }
+
+        if parts.len() >= 5 { board.halfmove_clock = parts[4].parse().unwrap_or(0); }
+        if parts.len() >= 6 { board.fullmove_number = parts[5].parse().unwrap_or(1); }
+
+        board.zobrist_key = board.generate_zobrist_key();
+        Some(board)
+    }
+
     pub fn generate_zobrist_key(&self) -> u64 {
         let mut key = 0;
         for c in 0..NUM_COLORS {
