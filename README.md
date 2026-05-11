@@ -58,5 +58,3 @@ Prometheus is completely open-source and welcomes pull requests! If you are a Ru
 3. **History Heuristic & Killer Moves**: Sibling-node move ordering optimizations.
 4. **NNUE Integration**: Evolving the evaluation from classical PSTs to an Efficiently Updatable Neural Network (HalfKP architecture stub already exists in `src/nn.rs`!).
 
-## License 📄
-This project is open-sourced under the MIT License.
