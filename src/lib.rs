@@ -1,5 +1,6 @@
 pub mod attacks;
 pub mod board;
+pub mod zobrist;
 pub mod movegen;
 pub mod search;
 pub mod evaluation;

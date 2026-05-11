@@ -105,6 +105,8 @@ pub struct Board {
     pub halfmove_clock: u16,
     // Fullmove number
     pub fullmove_number: u16,
+    // Zobrist hash key for the current position
+    pub zobrist_key: u64,
 }
 
 impl Board {
@@ -117,6 +119,7 @@ impl Board {
             castling_rights: 0,
             halfmove_clock: 0,
             fullmove_number: 1,
+            zobrist_key: 0,
         }
     }
 
@@ -155,7 +158,30 @@ impl Board {
 
         board.castling_rights = 0b1111; // All rights
 
+        board.zobrist_key = board.generate_zobrist_key();
+
         board
+    }
+
+    pub fn generate_zobrist_key(&self) -> u64 {
+        let mut key = 0;
+        for c in 0..NUM_COLORS {
+            for pt in 0..NUM_PIECE_TYPES {
+                let mut bb = self.pieces[c][pt];
+                while bb != 0 {
+                    let sq = pop_lsb(&mut bb);
+                    key ^= crate::zobrist::ZOBRIST.pieces[c][pt][sq.0 as usize];
+                }
+            }
+        }
+        if self.side_to_move == Color::Black {
+            key ^= crate::zobrist::ZOBRIST.side_to_move;
+        }
+        key ^= crate::zobrist::ZOBRIST.castling_rights[self.castling_rights as usize];
+        if let Some(ep) = self.en_passant {
+            key ^= crate::zobrist::ZOBRIST.en_passant[ep.file() as usize];
+        }
+        key
     }
 
     #[inline]
@@ -174,6 +200,8 @@ impl Board {
     fn move_piece(&mut self, pt: PieceType, color: Color, from: Square, to: Square) {
         self.remove_piece(pt, color, from);
         self.add_piece(pt, color, to);
+        self.zobrist_key ^= crate::zobrist::ZOBRIST.pieces[color as usize][pt as usize][from.0 as usize];
+        self.zobrist_key ^= crate::zobrist::ZOBRIST.pieces[color as usize][pt as usize][to.0 as usize];
     }
 
     pub fn piece_type_on(&self, sq: Square, color: Color) -> Option<PieceType> {
@@ -238,9 +266,12 @@ impl Board {
             castling_rights: self.castling_rights,
             halfmove_clock: self.halfmove_clock,
             captured_piece: None,
-            zobrist_key: 0,
+            zobrist_key: self.zobrist_key,
         };
 
+        if let Some(ep) = self.en_passant {
+            self.zobrist_key ^= crate::zobrist::ZOBRIST.en_passant[ep.file() as usize];
+        }
         self.en_passant = None;
         self.halfmove_clock += 1;
         if pt == PieceType::Pawn {
@@ -252,11 +283,13 @@ impl Board {
             if flags == crate::board::MOVE_FLAG_EP_CAPTURE {
                 let ep_pawn_sq = if us == Color::White { Square::new(to.0 - 8) } else { Square::new(to.0 + 8) };
                 self.remove_piece(PieceType::Pawn, them, ep_pawn_sq);
+                self.zobrist_key ^= crate::zobrist::ZOBRIST.pieces[them as usize][PieceType::Pawn as usize][ep_pawn_sq.0 as usize];
                 captured_piece = Some(PieceType::Pawn);
             } else {
                 captured_piece = self.piece_type_on(to, them);
                 if let Some(cap_pt) = captured_piece {
                     self.remove_piece(cap_pt, them, to);
+                    self.zobrist_key ^= crate::zobrist::ZOBRIST.pieces[them as usize][cap_pt as usize][to.0 as usize];
                 }
             }
         }
@@ -265,12 +298,16 @@ impl Board {
         self.move_piece(pt, us, from, to);
 
         if flags == crate::board::MOVE_FLAG_DOUBLE_PAWN_PUSH {
-            self.en_passant = Some(if us == Color::White { Square::new(to.0 - 8) } else { Square::new(to.0 + 8) });
+            let ep_sq = if us == Color::White { Square::new(to.0 - 8) } else { Square::new(to.0 + 8) };
+            self.en_passant = Some(ep_sq);
+            self.zobrist_key ^= crate::zobrist::ZOBRIST.en_passant[ep_sq.file() as usize];
         }
 
         if let Some(promo_pt) = m.promotion_piece_type() {
             self.remove_piece(PieceType::Pawn, us, to);
+            self.zobrist_key ^= crate::zobrist::ZOBRIST.pieces[us as usize][PieceType::Pawn as usize][to.0 as usize];
             self.add_piece(promo_pt, us, to);
+            self.zobrist_key ^= crate::zobrist::ZOBRIST.pieces[us as usize][promo_pt as usize][to.0 as usize];
         }
 
         if flags == crate::board::MOVE_FLAG_KING_CASTLE {
@@ -287,6 +324,8 @@ impl Board {
             }
         }
 
+        self.zobrist_key ^= crate::zobrist::ZOBRIST.castling_rights[self.castling_rights as usize];
+
         let clear_castling = |rights: &mut u8, sq: u8| {
             if sq == 0 { *rights &= !2; }
             if sq == 4 { *rights &= !3; }
@@ -298,8 +337,11 @@ impl Board {
         
         clear_castling(&mut self.castling_rights, from.0);
         clear_castling(&mut self.castling_rights, to.0);
+        
+        self.zobrist_key ^= crate::zobrist::ZOBRIST.castling_rights[self.castling_rights as usize];
 
         self.side_to_move = them;
+        self.zobrist_key ^= crate::zobrist::ZOBRIST.side_to_move;
 
         if self.is_in_check(us) {
             self.unmake_move(m, undo);
@@ -355,6 +397,8 @@ impl Board {
                 self.move_piece(PieceType::Rook, us, Square::new(59), Square::new(56));
             }
         }
+
+        self.zobrist_key = undo.zobrist_key;
     }
 }
 

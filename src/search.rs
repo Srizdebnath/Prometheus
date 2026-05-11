@@ -1,17 +1,22 @@
 use crate::board::{Board, Move};
 use crate::movegen::{MoveList, generate_moves};
 use crate::evaluation::evaluate;
+use crate::transposition::{TranspositionTable, TTEntry, NodeType};
 
 pub const INFINITY: i32 = 30000;
 pub const MATE_SCORE: i32 = 29000;
 
 pub struct Search {
     pub nodes: u64,
+    pub tt: TranspositionTable,
 }
 
 impl Search {
     pub fn new() -> Self {
-        Search { nodes: 0 }
+        Search { 
+            nodes: 0,
+            tt: TranspositionTable::new(16), // 16 MB TT
+        }
     }
 
     pub fn search(&mut self, board: &mut Board, depth: u8) -> (i32, Option<Move>) {
@@ -85,6 +90,33 @@ impl Search {
         beta: i32, 
         best_move_out: &mut Option<Move>
     ) -> i32 {
+        let alpha_orig = alpha;
+
+        let mut tt_move = None;
+        if let Some(entry) = self.tt.probe(board.zobrist_key) {
+            if entry.depth >= depth {
+                match entry.node_type() {
+                    NodeType::Exact => {
+                        if ply == 0 { *best_move_out = Some(entry.best_move); }
+                        return entry.score as i32;
+                    },
+                    NodeType::LowerBound => {
+                        if entry.score as i32 > alpha { alpha = entry.score as i32; }
+                    },
+                    NodeType::UpperBound => {
+                        let mut b = beta;
+                        if (entry.score as i32) < b { b = entry.score as i32; }
+                        if alpha >= b { return entry.score as i32; }
+                    }
+                }
+                if alpha >= beta {
+                    if ply == 0 { *best_move_out = Some(entry.best_move); }
+                    return entry.score as i32;
+                }
+            }
+            tt_move = Some(entry.best_move);
+        }
+
         if depth == 0 {
             return evaluate(board);
         }
@@ -96,7 +128,11 @@ impl Search {
 
         let mut scores = [0; crate::movegen::MAX_MOVES];
         for i in 0..move_list.len() {
-            scores[i] = Self::score_move(board, move_list[i]);
+            if Some(move_list[i]) == tt_move {
+                scores[i] = 1000000; // Best move from TT
+            } else {
+                scores[i] = Self::score_move(board, move_list[i]);
+            }
         }
 
         let mut legal_moves = 0;
@@ -150,6 +186,18 @@ impl Search {
 
         if ply == 0 {
             *best_move_out = best_move;
+        }
+
+        let node_type = if best_score <= alpha_orig {
+            NodeType::UpperBound
+        } else if best_score >= beta {
+            NodeType::LowerBound
+        } else {
+            NodeType::Exact
+        };
+
+        if let Some(m) = best_move {
+            self.tt.store(TTEntry::new(board.zobrist_key, m, best_score as i16, depth, node_type, 0));
         }
 
         best_score
