@@ -157,7 +157,207 @@ impl Board {
 
         board
     }
+
+    #[inline]
+    fn remove_piece(&mut self, pt: PieceType, color: Color, sq: Square) {
+        clear_bit(&mut self.pieces[color as usize][pt as usize], sq);
+        clear_bit(&mut self.colors[color as usize], sq);
+    }
+
+    #[inline]
+    fn add_piece(&mut self, pt: PieceType, color: Color, sq: Square) {
+        set_bit(&mut self.pieces[color as usize][pt as usize], sq);
+        set_bit(&mut self.colors[color as usize], sq);
+    }
+
+    #[inline]
+    fn move_piece(&mut self, pt: PieceType, color: Color, from: Square, to: Square) {
+        self.remove_piece(pt, color, from);
+        self.add_piece(pt, color, to);
+    }
+
+    pub fn piece_type_on(&self, sq: Square, color: Color) -> Option<PieceType> {
+        let bit = 1u64 << sq.0;
+        if (self.colors[color as usize] & bit) == 0 { return None; }
+        for pt in 0..NUM_PIECE_TYPES {
+            if (self.pieces[color as usize][pt] & bit) != 0 {
+                return Some(match pt {
+                    0 => PieceType::Pawn,
+                    1 => PieceType::Knight,
+                    2 => PieceType::Bishop,
+                    3 => PieceType::Rook,
+                    4 => PieceType::Queen,
+                    _ => PieceType::King,
+                });
+            }
+        }
+        None
+    }
+
+    pub fn is_square_attacked(&self, sq: Square, by_color: Color) -> bool {
+        let occ = self.colors[Color::White as usize] | self.colors[Color::Black as usize];
+        
+        let pawns = self.pieces[by_color as usize][PieceType::Pawn as usize];
+        if (crate::attacks::pawn_attacks(by_color.opposite(), sq) & pawns) != 0 { return true; }
+        
+        let knights = self.pieces[by_color as usize][PieceType::Knight as usize];
+        if (crate::attacks::knight_attacks(sq) & knights) != 0 { return true; }
+        
+        let kings = self.pieces[by_color as usize][PieceType::King as usize];
+        if (crate::attacks::king_attacks(sq) & kings) != 0 { return true; }
+        
+        let bishops = self.pieces[by_color as usize][PieceType::Bishop as usize];
+        let queens = self.pieces[by_color as usize][PieceType::Queen as usize];
+        if (crate::attacks::bishop_attacks(sq, occ) & (bishops | queens)) != 0 { return true; }
+        
+        let rooks = self.pieces[by_color as usize][PieceType::Rook as usize];
+        if (crate::attacks::rook_attacks(sq, occ) & (rooks | queens)) != 0 { return true; }
+        
+        false
+    }
+
+    pub fn is_in_check(&self, color: Color) -> bool {
+        let kings = self.pieces[color as usize][PieceType::King as usize];
+        if kings == 0 { return false; }
+        let sq = lsb(kings);
+        self.is_square_attacked(sq, color.opposite())
+    }
+
+    pub fn make_move(&mut self, m: Move) -> Option<UndoInfo> {
+        let us = self.side_to_move;
+        let them = us.opposite();
+        let from = m.from();
+        let to = m.to();
+        let flags = m.flags();
+
+        let pt = self.piece_type_on(from, us)?;
+        let mut captured_piece = None;
+
+        let mut undo = UndoInfo {
+            en_passant: self.en_passant,
+            castling_rights: self.castling_rights,
+            halfmove_clock: self.halfmove_clock,
+            captured_piece: None,
+            zobrist_key: 0,
+        };
+
+        self.en_passant = None;
+        self.halfmove_clock += 1;
+        if pt == PieceType::Pawn {
+            self.halfmove_clock = 0;
+        }
+
+        if m.is_capture() {
+            self.halfmove_clock = 0;
+            if flags == crate::board::MOVE_FLAG_EP_CAPTURE {
+                let ep_pawn_sq = if us == Color::White { Square::new(to.0 - 8) } else { Square::new(to.0 + 8) };
+                self.remove_piece(PieceType::Pawn, them, ep_pawn_sq);
+                captured_piece = Some(PieceType::Pawn);
+            } else {
+                captured_piece = self.piece_type_on(to, them);
+                if let Some(cap_pt) = captured_piece {
+                    self.remove_piece(cap_pt, them, to);
+                }
+            }
+        }
+        undo.captured_piece = captured_piece;
+
+        self.move_piece(pt, us, from, to);
+
+        if flags == crate::board::MOVE_FLAG_DOUBLE_PAWN_PUSH {
+            self.en_passant = Some(if us == Color::White { Square::new(to.0 - 8) } else { Square::new(to.0 + 8) });
+        }
+
+        if let Some(promo_pt) = m.promotion_piece_type() {
+            self.remove_piece(PieceType::Pawn, us, to);
+            self.add_piece(promo_pt, us, to);
+        }
+
+        if flags == crate::board::MOVE_FLAG_KING_CASTLE {
+            if us == Color::White {
+                self.move_piece(PieceType::Rook, us, Square::new(7), Square::new(5));
+            } else {
+                self.move_piece(PieceType::Rook, us, Square::new(63), Square::new(61));
+            }
+        } else if flags == crate::board::MOVE_FLAG_QUEEN_CASTLE {
+            if us == Color::White {
+                self.move_piece(PieceType::Rook, us, Square::new(0), Square::new(3));
+            } else {
+                self.move_piece(PieceType::Rook, us, Square::new(56), Square::new(59));
+            }
+        }
+
+        let clear_castling = |rights: &mut u8, sq: u8| {
+            if sq == 0 { *rights &= !2; }
+            if sq == 4 { *rights &= !3; }
+            if sq == 7 { *rights &= !1; }
+            if sq == 56 { *rights &= !8; }
+            if sq == 60 { *rights &= !12; }
+            if sq == 63 { *rights &= !4; }
+        };
+        
+        clear_castling(&mut self.castling_rights, from.0);
+        clear_castling(&mut self.castling_rights, to.0);
+
+        self.side_to_move = them;
+
+        if self.is_in_check(us) {
+            self.unmake_move(m, undo);
+            return None;
+        }
+
+        Some(undo)
+    }
+
+    pub fn unmake_move(&mut self, m: Move, undo: UndoInfo) {
+        let us = self.side_to_move.opposite();
+        let them = self.side_to_move;
+        
+        self.side_to_move = us;
+        self.en_passant = undo.en_passant;
+        self.castling_rights = undo.castling_rights;
+        self.halfmove_clock = undo.halfmove_clock;
+
+        let from = m.from();
+        let to = m.to();
+        let flags = m.flags();
+
+        let pt = if m.is_promotion() {
+            let promo_pt = m.promotion_piece_type().unwrap();
+            self.remove_piece(promo_pt, us, to);
+            self.add_piece(PieceType::Pawn, us, to);
+            PieceType::Pawn
+        } else {
+            self.piece_type_on(to, us).unwrap()
+        };
+
+        self.move_piece(pt, us, to, from);
+
+        if m.is_capture() {
+            if flags == crate::board::MOVE_FLAG_EP_CAPTURE {
+                let ep_pawn_sq = if us == Color::White { Square::new(to.0 - 8) } else { Square::new(to.0 + 8) };
+                self.add_piece(PieceType::Pawn, them, ep_pawn_sq);
+            } else if let Some(cap_pt) = undo.captured_piece {
+                self.add_piece(cap_pt, them, to);
+            }
+        }
+
+        if flags == crate::board::MOVE_FLAG_KING_CASTLE {
+            if us == Color::White {
+                self.move_piece(PieceType::Rook, us, Square::new(5), Square::new(7));
+            } else {
+                self.move_piece(PieceType::Rook, us, Square::new(61), Square::new(63));
+            }
+        } else if flags == crate::board::MOVE_FLAG_QUEEN_CASTLE {
+            if us == Color::White {
+                self.move_piece(PieceType::Rook, us, Square::new(3), Square::new(0));
+            } else {
+                self.move_piece(PieceType::Rook, us, Square::new(59), Square::new(56));
+            }
+        }
+    }
 }
+
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct Move(pub u16);
