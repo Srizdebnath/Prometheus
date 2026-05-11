@@ -126,6 +126,7 @@ impl Search {
         }
 
         let alpha_orig = alpha;
+        let in_check = board.is_in_check(board.side_to_move);
 
         let mut tt_move = None;
         if let Some(entry) = self.tt.probe(board.zobrist_key) {
@@ -153,7 +154,7 @@ impl Search {
         }
 
         if depth == 0 {
-            return evaluate(board);
+            return self.quiescence(board, alpha, beta, ply);
         }
 
         self.nodes += 1;
@@ -192,14 +193,31 @@ impl Search {
             if let Some(undo) = board.make_move(m) {
                 legal_moves += 1;
                 
+                let gives_check = board.is_in_check(board.side_to_move);
+                let is_tactical = m.is_capture() || m.is_promotion() || gives_check;
+
                 let score = if legal_moves == 1 {
                     let mut dummy = None;
                     -self.alpha_beta(board, depth - 1, ply + 1, -beta, -alpha, &mut dummy)
                 } else {
-                    let mut dummy = None;
-                    let mut s = -self.alpha_beta(board, depth - 1, ply + 1, -alpha - 1, -alpha, &mut dummy);
-                    if s > alpha && s < beta {
-                        s = -self.alpha_beta(board, depth - 1, ply + 1, -beta, -alpha, &mut dummy);
+                    let mut s = 0;
+                    let mut do_full_search = true;
+
+                    // Late Move Reduction (LMR)
+                    if depth >= 3 && legal_moves >= 4 && !is_tactical && !in_check {
+                        let mut dummy = None;
+                        s = -self.alpha_beta(board, depth - 2, ply + 1, -alpha - 1, -alpha, &mut dummy);
+                        if s <= alpha {
+                            do_full_search = false;
+                        }
+                    }
+
+                    if do_full_search {
+                        let mut dummy = None;
+                        s = -self.alpha_beta(board, depth - 1, ply + 1, -alpha - 1, -alpha, &mut dummy);
+                        if s > alpha && s < beta {
+                            s = -self.alpha_beta(board, depth - 1, ply + 1, -beta, -alpha, &mut dummy);
+                        }
                     }
                     s
                 };
@@ -249,5 +267,81 @@ impl Search {
         }
 
         best_score
+    }
+
+    fn quiescence(
+        &mut self,
+        board: &mut Board,
+        mut alpha: i32,
+        beta: i32,
+        ply: u8,
+    ) -> i32 {
+        self.nodes += 1;
+        self.check_time();
+        if self.abort_search {
+            return 0;
+        }
+
+        let in_check = board.is_in_check(board.side_to_move);
+        
+        let stand_pat = if in_check { -crate::search::INFINITY } else { evaluate(board) };
+        
+        if !in_check {
+            if stand_pat >= beta {
+                return beta;
+            }
+            if alpha < stand_pat {
+                alpha = stand_pat;
+            }
+        }
+
+        let mut move_list = MoveList::new();
+        generate_moves(board, &mut move_list);
+
+        let mut scores = [0; crate::movegen::MAX_MOVES];
+        for i in 0..move_list.len() {
+            scores[i] = Self::score_move(board, move_list[i]);
+        }
+
+        let mut legal_moves = 0;
+
+        for i in 0..move_list.len() {
+            // Selection sort for captures
+            let mut best_idx = i;
+            for j in (i + 1)..move_list.len() {
+                if scores[j] > scores[best_idx] {
+                    best_idx = j;
+                }
+            }
+            
+            scores.swap(i, best_idx);
+            let m = move_list[best_idx];
+            move_list[best_idx] = move_list[i];
+            move_list[i] = m;
+
+            // In QS, we ONLY look at tactical moves, UNLESS we are in check!
+            if !in_check && !m.is_capture() && !m.is_promotion() {
+                continue;
+            }
+
+            if let Some(undo) = board.make_move(m) {
+                legal_moves += 1;
+                let score = -self.quiescence(board, -beta, -alpha, ply + 1);
+                board.unmake_move(m, undo);
+
+                if score >= beta {
+                    return beta;
+                }
+                if score > alpha {
+                    alpha = score;
+                }
+            }
+        }
+
+        if in_check && legal_moves == 0 {
+            return -crate::search::MATE_SCORE + ply as i32;
+        }
+
+        alpha
     }
 }
