@@ -147,23 +147,17 @@ pub fn get_ray_attacks(sq: Square, occ: Bitboard, dir: usize) -> Bitboard {
     ray ^ RAYS[dir][blocker_sq]
 }
 
-#[inline]
+#[inline(always)]
 pub fn bishop_attacks(sq: Square, occ: Bitboard) -> Bitboard {
-    get_ray_attacks(sq, occ, 4) | 
-    get_ray_attacks(sq, occ, 5) | 
-    get_ray_attacks(sq, occ, 6) | 
-    get_ray_attacks(sq, occ, 7)
+    crate::magics::magic_bishop_attacks(sq, occ)
 }
 
-#[inline]
+#[inline(always)]
 pub fn rook_attacks(sq: Square, occ: Bitboard) -> Bitboard {
-    get_ray_attacks(sq, occ, 0) | 
-    get_ray_attacks(sq, occ, 1) | 
-    get_ray_attacks(sq, occ, 2) | 
-    get_ray_attacks(sq, occ, 3)
+    crate::magics::magic_rook_attacks(sq, occ)
 }
 
-#[inline]
+#[inline(always)]
 pub fn queen_attacks(sq: Square, occ: Bitboard) -> Bitboard {
-    bishop_attacks(sq, occ) | rook_attacks(sq, occ)
+    crate::magics::magic_queen_attacks(sq, occ)
 }

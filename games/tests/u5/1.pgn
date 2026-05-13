@@ -1,0 +1,22 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "62"]
+[Termination "normal"]
+[WhiteClock "0:02:46.261"]
+[BlackClock "0:02:49.676"]
+[TimeControl "300+0"]
+[ECO "C17"]
+[Opening "French Defense"]
+[Variation "Winawer Variation, Bogoljubov Variation"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. Bd2 Ne7 6. Nb5 Bxd2+ 7. Qxd2 O-O 8.
+dxc5 Nd7 9. Qc3 f6 10. exf6 Nxf6 11. Bd3 Bd7 12. Nd6 b6 13. Nf3 Qc7 14. b4 a5
+15. b5 bxc5 16. Qe5 Ng4 17. Qh5 h6 18. Qxg4 Qxd6 19. a4 c4 20. Be2 Rf4 21. Qh5
+Qb4+ 22. Kf1 Re4 23. Ne1 Rf8 24. Bf3 Rf5 25. Qh3 Ref4 26. Rg1 e5 27. g3 Rxf3 28.
+Nxf3 Qc3 29. Re1 Qxf3 30. Re2 e4 31. Rxe4 Qxf2# 0-1
+

@@ -8,4 +8,5 @@ pub mod uci;
 pub mod nn;
 pub mod threading;
 pub mod transposition;
-
+pub mod openings;
+pub mod magics;

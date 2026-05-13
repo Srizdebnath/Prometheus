@@ -249,7 +249,7 @@ const QUEEN_MOBILITY_MG: i32 = 1;
 const QUEEN_MOBILITY_EG: i32 = 2;
 
 // King safety: penalty for open files near king, bonus for pawn shield
-const KING_PAWN_SHIELD_BONUS_MG: i32 = 10;
+
 
 // Tempo bonus for the side to move
 const TEMPO_BONUS: i32 = 15;
@@ -413,16 +413,18 @@ pub fn evaluate(board: &Board) -> i32 {
         }
     }
 
-    // ---- King Safety (pawn shield, simple) ----
+    // ---- King Safety (comprehensive) ----
     for c in [Color::White, Color::Black] {
         let sign = if c == Color::White { 1 } else { -1 };
+        let them = c.opposite();
         let king_bb = board.pieces[c as usize][PieceType::King as usize];
         if king_bb == 0 { continue; }
         let king_sq = crate::board::lsb(king_bb);
         let king_file = king_sq.file() as usize;
         let our_pawns = board.pieces[c as usize][PieceType::Pawn as usize];
+        let their_pawns = board.pieces[them as usize][PieceType::Pawn as usize];
         
-        // Count pawns on the king's file and adjacent files in front of the king
+        // Pawn Shield
         let shield_files = if king_file == 0 {
             FILE_MASK[0] | FILE_MASK[1]
         } else if king_file == 7 {
@@ -430,35 +432,101 @@ pub fn evaluate(board: &Board) -> i32 {
         } else {
             FILE_MASK[king_file - 1] | FILE_MASK[king_file] | FILE_MASK[king_file + 1]
         };
-        
-        // Only count pawns in front of the king (ranks 2-3 for white, 6-7 for black)
         let shield_zone = match c {
             Color::White => shield_files & (RANK_MASK[1] | RANK_MASK[2]),
             Color::Black => shield_files & (RANK_MASK[5] | RANK_MASK[6]),
         };
-        
         let shield_count = popcount(our_pawns & shield_zone) as i32;
-        mg_score += sign * shield_count * KING_PAWN_SHIELD_BONUS_MG;
+        mg_score += sign * shield_count * 12;
+        mg_score += sign * (shield_count - 3).min(0) * 15;
+
+        // Open files near king
+        let kf_start = if king_file > 0 { king_file - 1 } else { 0 };
+        let kf_end = if king_file < 7 { king_file + 1 } else { 7 };
+        for f in kf_start..=kf_end {
+            let file_bb = FILE_MASK[f];
+            if (our_pawns & file_bb) == 0 {
+                if (their_pawns & file_bb) == 0 {
+                    mg_score -= sign * 25;
+                } else {
+                    mg_score -= sign * 12;
+                }
+            }
+        }
+        
+        // Enemy attackers near king
+        let king_zone = attacks::king_attacks(king_sq) | (1u64 << king_sq.0);
+        let mut attacker_count = 0i32;
+        let mut attack_weight = 0i32;
+        
+        let mut en = board.pieces[them as usize][PieceType::Knight as usize];
+        while en != 0 {
+            let sq = crate::board::pop_lsb(&mut en);
+            if (attacks::knight_attacks(sq) & king_zone) != 0 { attacker_count += 1; attack_weight += 2; }
+        }
+        let mut eb = board.pieces[them as usize][PieceType::Bishop as usize];
+        while eb != 0 {
+            let sq = crate::board::pop_lsb(&mut eb);
+            if (attacks::bishop_attacks(sq, all_occ) & king_zone) != 0 { attacker_count += 1; attack_weight += 2; }
+        }
+        let mut er = board.pieces[them as usize][PieceType::Rook as usize];
+        while er != 0 {
+            let sq = crate::board::pop_lsb(&mut er);
+            if (attacks::rook_attacks(sq, all_occ) & king_zone) != 0 { attacker_count += 1; attack_weight += 3; }
+        }
+        let mut eq = board.pieces[them as usize][PieceType::Queen as usize];
+        while eq != 0 {
+            let sq = crate::board::pop_lsb(&mut eq);
+            if (attacks::queen_attacks(sq, all_occ) & king_zone) != 0 { attacker_count += 1; attack_weight += 5; }
+        }
+        
+        if attacker_count >= 2 {
+            let danger = attack_weight * attack_weight / 4;
+            mg_score -= sign * danger;
+        }
+    }
+    
+    // ---- Connected Passed Pawns & Rook Behind Passer (endgame) ----
+    for c in [Color::White, Color::Black] {
+        let sign = if c == Color::White { 1 } else { -1 };
+        let our_pawns = board.pieces[c as usize][PieceType::Pawn as usize];
+        let their_pawns = board.pieces[c.opposite() as usize][PieceType::Pawn as usize];
+        let our_rooks = board.pieces[c as usize][PieceType::Rook as usize];
+        
+        let mut pawns_bb = our_pawns;
+        while pawns_bb != 0 {
+            let sq = crate::board::pop_lsb(&mut pawns_bb);
+            let file = sq.file() as usize;
+            let rank = sq.rank() as usize;
+            let pp_mask = passed_pawn_mask(sq.0 as usize, c);
+            
+            if (their_pawns & pp_mask) == 0 {
+                let relative_rank = if c == Color::White { rank } else { 7 - rank };
+                // Connected passed pawn
+                if file > 0 && (our_pawns & FILE_MASK[file - 1] & RANK_MASK[rank]) != 0 {
+                    eg_score += sign * 15 * relative_rank as i32;
+                }
+                if file < 7 && (our_pawns & FILE_MASK[file + 1] & RANK_MASK[rank]) != 0 {
+                    eg_score += sign * 15 * relative_rank as i32;
+                }
+                // Rook behind passed pawn
+                let behind_mask = match c {
+                    Color::White => { let mut m = 0u64; for r in 0..rank { m |= RANK_MASK[r]; } FILE_MASK[file] & m },
+                    Color::Black => { let mut m = 0u64; for r in (rank+1)..8 { m |= RANK_MASK[r]; } FILE_MASK[file] & m },
+                };
+                if (our_rooks & behind_mask) != 0 { eg_score += sign * 25; }
+            }
+        }
     }
 
-    // Cap phase at TOTAL_PHASE
-    if phase > TOTAL_PHASE {
-        phase = TOTAL_PHASE;
-    }
+    // Cap phase
+    if phase > TOTAL_PHASE { phase = TOTAL_PHASE; }
 
-    // Interpolate between midgame and endgame
     let mg_weight = phase;
     let eg_weight = TOTAL_PHASE - phase;
-    
     let score = (mg_score * mg_weight + eg_score * eg_weight) / TOTAL_PHASE;
 
-    // Tempo bonus for the side to move
     let tempo = TEMPO_BONUS;
-
-    // Perspective (positive score means side to move is winning)
-    if board.side_to_move == Color::White {
-        score + tempo
-    } else {
-        -score + tempo
-    }
+    if board.side_to_move == Color::White { score + tempo } else { -score + tempo }
 }
+

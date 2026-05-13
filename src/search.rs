@@ -4,6 +4,8 @@ use crate::movegen::{MoveList, generate_moves};
 use crate::evaluation::evaluate;
 use crate::transposition::{TranspositionTable, TTEntry, NodeType};
 
+pub const MAX_GAME_PLY: usize = 1024;
+
 pub const INFINITY: i32 = 30000;
 pub const MATE_SCORE: i32 = 29000;
 pub const MAX_PLY: usize = 128;
@@ -44,6 +46,136 @@ fn piece_value_see(pt: PieceType) -> i32 {
     }
 }
 
+/// Static Exchange Evaluation: returns true if the capture on `m` wins 
+/// material (or is at least equal). This is used for:
+/// - Pruning losing captures in quiescence search
+/// - Better move ordering (good captures vs bad captures)
+/// - More aggressive LMR on SEE-negative moves
+pub fn see_ge(board: &Board, m: Move, threshold: i32) -> bool {
+    use crate::board::Color;
+    use crate::attacks;
+    
+    let from = m.from();
+    let to = m.to();
+    let us = board.side_to_move;
+    
+    // Get the initial balance: value of captured piece - threshold
+    let victim_pt = board.piece_type_on(to, us.opposite());
+    let mut balance = if let Some(vpt) = victim_pt {
+        piece_value_see(vpt) - threshold
+    } else {
+        // En passant captures a pawn
+        if m.flags() == 5 { 100 - threshold } else { -threshold }
+    };
+    
+    // If even capturing for free doesn't meet threshold, fail
+    if balance < 0 { return false; }
+    
+    // Value of our piece that just captured
+    let attacker_pt = board.piece_type_on(from, us).unwrap_or(PieceType::Pawn);
+    
+    // Worst case: we lose our piece
+    balance -= piece_value_see(attacker_pt);
+    
+    // If even losing our piece still meets threshold, succeed
+    if balance >= 0 { return true; }
+    
+    // Now simulate the swap sequence
+    let mut occ = (board.colors[0] | board.colors[1]) ^ (1u64 << from.0) ^ (1u64 << to.0);
+    
+    // Handle en passant - remove the captured pawn too
+    if m.flags() == 5 {
+        let ep_pawn_sq = if us == Color::White { to.0 - 8 } else { to.0 + 8 };
+        occ ^= 1u64 << ep_pawn_sq;
+    }
+    
+    let mut side_to_move = us.opposite(); // opponent's turn to recapture
+    
+    loop {
+        // Find the least valuable attacker for `side_to_move` to the `to` square
+        
+        // Pawns
+        let pawn_attackers = attacks::pawn_attacks(side_to_move.opposite(), to) 
+                           & board.pieces[side_to_move as usize][PieceType::Pawn as usize] & occ;
+        if pawn_attackers != 0 {
+            balance = -balance - 1 - 100; // Capture and risk losing a pawn
+            if balance >= 0 { // Even losing a pawn still above threshold
+                // But check: can the other side recapture?
+                occ ^= 1u64 << pawn_attackers.trailing_zeros();
+                side_to_move = side_to_move.opposite();
+                continue;
+            }
+            return side_to_move != us; // If it's our turn and we can't do better, fail
+        }
+        
+        // Knights
+        let knight_attackers = attacks::knight_attacks(to) 
+                             & board.pieces[side_to_move as usize][PieceType::Knight as usize] & occ;
+        if knight_attackers != 0 {
+            balance = -balance - 1 - 300;
+            if balance >= 0 {
+                occ ^= 1u64 << knight_attackers.trailing_zeros();
+                side_to_move = side_to_move.opposite();
+                continue;
+            }
+            return side_to_move != us;
+        }
+        
+        // Bishops
+        let bishop_attackers = attacks::bishop_attacks(to, occ) 
+                             & board.pieces[side_to_move as usize][PieceType::Bishop as usize] & occ;
+        if bishop_attackers != 0 {
+            balance = -balance - 1 - 320;
+            if balance >= 0 {
+                occ ^= 1u64 << bishop_attackers.trailing_zeros();
+                side_to_move = side_to_move.opposite();
+                continue;
+            }
+            return side_to_move != us;
+        }
+        
+        // Rooks
+        let rook_attackers = attacks::rook_attacks(to, occ) 
+                           & board.pieces[side_to_move as usize][PieceType::Rook as usize] & occ;
+        if rook_attackers != 0 {
+            balance = -balance - 1 - 500;
+            if balance >= 0 {
+                occ ^= 1u64 << rook_attackers.trailing_zeros();
+                side_to_move = side_to_move.opposite();
+                continue;
+            }
+            return side_to_move != us;
+        }
+        
+        // Queens
+        let queen_attackers = attacks::queen_attacks(to, occ) 
+                            & board.pieces[side_to_move as usize][PieceType::Queen as usize] & occ;
+        if queen_attackers != 0 {
+            balance = -balance - 1 - 900;
+            if balance >= 0 {
+                occ ^= 1u64 << queen_attackers.trailing_zeros();
+                side_to_move = side_to_move.opposite();
+                continue;
+            }
+            return side_to_move != us;
+        }
+        
+        // King
+        let king_attackers = attacks::king_attacks(to) 
+                           & board.pieces[side_to_move as usize][PieceType::King as usize] & occ;
+        if king_attackers != 0 {
+            // King capture: only valid if opponent can't recapture
+            return side_to_move != us;
+        }
+        
+        // No more attackers — current side to move loses
+        break;
+    }
+    
+    // Side to move has no recapture, other side wins
+    side_to_move != us
+}
+
 pub struct Search {
     pub nodes: u64,
     pub tt: TranspositionTable,
@@ -65,6 +197,9 @@ pub struct Search {
     
     // PV tracking
     pub seldepth: u8,
+    
+    // Position history for repetition detection
+    pub position_history: Vec<u64>,
 }
 
 impl Search {
@@ -81,6 +216,7 @@ impl Search {
             countermoves: [[Move(0); 64]; 6],
             search_generation: 0,
             seldepth: 0,
+            position_history: Vec::with_capacity(512),
         }
     }
 
@@ -139,7 +275,7 @@ impl Search {
                 (-INFINITY, INFINITY)
             };
             
-            let mut current_best: Option<Move> = None;
+            let mut current_best;
             let mut score;
             
             // Aspiration window loop with widening
@@ -193,11 +329,13 @@ impl Search {
                 format!("cp {}", best_score)
             };
 
-            eprintln!(
+            println!(
                 "info depth {} seldepth {} score {} nodes {} nps {} time {} hashfull {}",
                 d, self.seldepth, score_str, self.nodes, nps,
                 elapsed.as_millis(), self.tt.hashfull()
             );
+            use std::io::Write;
+            std::io::stdout().flush().ok();
             
             // If mate found, stop early
             if best_score.abs() >= MATE_SCORE - 1000 {
@@ -210,12 +348,26 @@ impl Search {
             }
         }
         
+        if best_move.is_none() {
+            let mut fallback_list = MoveList::new();
+            generate_moves(board, &mut fallback_list);
+            for i in 0..fallback_list.len() {
+                let m = fallback_list[i];
+                if let Some(undo) = board.make_move(m) {
+                    board.unmake_move(m, undo);
+                    best_move = Some(m);
+                    break;
+                }
+            }
+        }
+        
         (best_score, best_move)
     }
 
     // Move ordering scores
     const TT_MOVE_SCORE: i32 = 10_000_000;
     const GOOD_CAPTURE_BASE: i32 = 8_000_000;
+    const BAD_CAPTURE_BASE: i32 = -2_000_000;
     const KILLER1_SCORE: i32 = 6_000_000;
     const KILLER2_SCORE: i32 = 5_900_000;
     const COUNTER_SCORE: i32 = 5_800_000;
@@ -230,10 +382,14 @@ impl Search {
         if m.is_capture() {
             let attacker = board.piece_type_on(m.from(), board.side_to_move).unwrap_or(PieceType::Pawn);
             let victim = board.piece_type_on(m.to(), board.side_to_move.opposite()).unwrap_or(PieceType::Pawn);
-            
-            // MVV-LVA with a high base to sort above quiets
             let mvv_lva = piece_value_see(victim) * 10 - piece_value_see(attacker);
-            return Self::GOOD_CAPTURE_BASE + mvv_lva;
+            
+            // Use SEE to separate good and bad captures
+            if see_ge(board, m, 0) {
+                return Self::GOOD_CAPTURE_BASE + mvv_lva;
+            } else {
+                return Self::BAD_CAPTURE_BASE + mvv_lva;
+            }
         }
         
         if m.is_promotion() {
@@ -323,6 +479,23 @@ impl Search {
             return evaluate(board);
         }
 
+        // Draw detection: repetition and 50-move rule
+        if ply > 0 {
+            // 50-move rule
+            if board.halfmove_clock >= 100 {
+                return 0;
+            }
+            // Repetition detection: check if current position appeared before
+            let key = board.zobrist_key;
+            let hist_len = self.position_history.len();
+            let lookback = (board.halfmove_clock as usize).min(hist_len);
+            for i in (0..lookback).rev() {
+                if self.position_history[hist_len - 1 - i] == key {
+                    return 0; // Draw by repetition
+                }
+            }
+        }
+
         let is_root = ply == 0;
         let in_check = board.is_in_check(board.side_to_move);
         let is_pv = beta - alpha > 1;
@@ -338,6 +511,8 @@ impl Search {
         let mut tt_move = None;
         if let Some(entry) = self.tt.probe(board.zobrist_key) {
             tt_move = Some(entry.best_move);
+            // Validate TT move: skip if clearly invalid (null move or out of range)
+            if entry.best_move.0 == 0 { tt_move = None; }
             
             if !is_pv && entry.depth >= depth {
                 let tt_score = entry.score as i32;
@@ -356,6 +531,19 @@ impl Search {
                 if alpha >= beta {
                     if is_root { *best_move_out = Some(entry.best_move); }
                     return tt_score;
+                }
+            }
+        }
+
+        // Internal Iterative Deepening (IID)
+        // When we have no TT move at a PV node, do a shallow search first
+        if is_pv && tt_move.is_none() && depth >= 4 && !in_check {
+            let mut dummy = None;
+            self.alpha_beta(board, depth - 2, ply, alpha, beta, &mut dummy, prev_move);
+            // Now probe TT again for a move hint
+            if let Some(entry) = self.tt.probe(board.zobrist_key) {
+                if entry.best_move.0 != 0 {
+                    tt_move = Some(entry.best_move);
                 }
             }
         }
@@ -475,9 +663,21 @@ impl Search {
                     searched_quiets.push(m);
                 }
 
+                // SEE Pruning: skip captures that lose material at low depths
+                if !is_pv && !in_check && depth <= 7 && m.is_capture() {
+                    if !see_ge(board, m, -20 * depth as i32 * depth as i32) {
+                        board.unmake_move(m, undo);
+                        continue;
+                    }
+                }
+
                 // Late Move Pruning (LMP): skip quiet moves at low depths
-                if !is_pv && !in_check && is_quiet && depth <= 5 && !gives_check {
-                    let lmp_threshold = 3 + depth as usize * depth as usize;
+                if !is_pv && !in_check && is_quiet && depth <= 8 && !gives_check {
+                    let lmp_threshold = if depth <= 5 {
+                        3 + depth as usize * depth as usize
+                    } else {
+                        5 + depth as usize * depth as usize / 2
+                    };
                     if legal_moves > lmp_threshold {
                         board.unmake_move(m, undo);
                         continue;
@@ -485,8 +685,8 @@ impl Search {
                 }
 
                 // Futility Pruning: at low depth, if static eval + margin < alpha, skip quiet
-                if !is_pv && !in_check && is_quiet && depth <= 6 && !gives_check {
-                    let futility_margin = 100 * depth as i32;
+                if !is_pv && !in_check && is_quiet && depth <= 8 && !gives_check {
+                    let futility_margin = 120 * depth as i32;
                     if static_eval + futility_margin <= alpha {
                         board.unmake_move(m, undo);
                         // Track the best score we'd get from stand-pat
@@ -509,10 +709,13 @@ impl Search {
                     if depth >= 3 && legal_moves >= 3 && !in_check {
                         let mut r = lmr_reduction(depth as usize, legal_moves);
                         
-                        // Reduce less for: killers, captures, checks, PV nodes
-                        if is_tactical { r -= 1; }
+                        // Reduce less for: killers, good captures, checks, PV nodes
+                        if m.is_capture() && see_ge(board, m, 0) { r -= 1; }
                         if gives_check { r -= 1; }
                         if is_pv { r -= 1; }
+                        
+                        // Reduce more for bad captures and moves with bad history
+                        if m.is_capture() && !see_ge(board, m, 0) { r += 1; }
                         
                         // Reduce more for: moves with bad history
                         if is_quiet {
@@ -675,8 +878,8 @@ impl Search {
                 continue;
             }
             
-            // SEE pruning: skip captures that are clearly losing material
-            if !in_check && m.is_capture() && scores[i] < -200 {
+            // SEE pruning: skip captures that lose material
+            if !in_check && m.is_capture() && !see_ge(board, m, 0) {
                 continue;
             }
 

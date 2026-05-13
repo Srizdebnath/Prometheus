@@ -1,0 +1,21 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "80"]
+[Termination "normal"]
+[ECO "B13"]
+[Opening "Caro-Kann Defense"]
+[Variation "Panov Attack, Modern Defense"]
+
+1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4 Nf6 5. Nc3 Nc6 6. Bg5 Be6 7. c5 g6 8. Nf3
+Ne4 9. Bd3 Nxg5 10. Nxg5 Bg7 11. Nxe6 fxe6 12. Bb5 O-O 13. Bxc6 bxc6 14. O-O Qb8
+15. Qg4 Rf5 16. Rab1 Qb4 17. Ne2 Raf8 18. a3 Qd2 19. Rfd1 Qc2 20. Rdc1 Qd3 21.
+Rd1 Qc4 22. f4 e5 23. Rbc1 Qa6 24. dxe5 h5 25. Qxg6 Qxe2 26. Qxc6 Rxf4 27. Qxd5+
+Kh8 28. g3 Rf2 29. Re1 Qxb2 30. Rb1 Qc2 31. Rf1 Bh6 32. Rxf2 Qxf2+ 33. Kh1 Qe2
+34. Rg1 Rf2 35. Qg2 Rxg2 36. Rxg2 Qf1+ 37. Rg1 Qf3+ 38. Rg2 h4 39. a4 h3 40. Kg1
+Qxg2# 0-1
+

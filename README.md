@@ -9,7 +9,7 @@ A high-performance chess engine written in Rust, designed for competitive play v
 - Full Zobrist hashing for transposition table and repetition detection
 - Complete FEN parsing and UCI protocol support
 
-### Search
+### Search & Draw Detection
 - **Iterative Deepening** with aspiration windows
 - **Alpha-Beta Pruning** with Principal Variation Search (PVS)
 - **Null Move Pruning** (NMP) — skip our turn; if still winning, prune
@@ -20,6 +20,7 @@ A high-performance chess engine written in Rust, designed for competitive play v
 - **Razoring** — drop into quiescence when far below alpha
 - **Check Extensions** — extend search when in check
 - **Quiescence Search** with delta pruning and SEE-based move pruning
+- **Draw Detection** — 50-move rule and position history repetition detection
 
 ### Move Ordering
 - TT move priority
@@ -35,8 +36,13 @@ A high-performance chess engine written in Rust, designed for competitive play v
 - **Bishop Pair** bonus
 - **Rook on Open/Semi-Open Files**
 - **Piece Mobility** (knight, bishop, rook, queen)
-- **King Safety** (pawn shield)
+- **King Safety**: comprehensive evaluation (pawn shield, open files near king, enemy attacker counting with quadratic danger scaling)
+- **Endgame Knowledge**: connected passed pawns, rook behind passed pawn bonuses
 - Tempo bonus
+
+### Opening Book
+- Built-in polyglot-style opening book extracted from 1.6M+ master games (Carlsen, Nakamura, Anand, etc.)
+- Automatically avoids early blunders and selects GM-approved opening lines.
 
 ### Transposition Table
 - 64MB default (configurable via UCI `Hash` option)

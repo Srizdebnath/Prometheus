@@ -1,0 +1,14 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "14"]
+[Termination "rules infraction"]
+[ECO "E61"]
+[Opening "King's Indian Defense"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. e4 d6 6. h3 e5 7. d5 Nh5 0-1
+

@@ -1,0 +1,23 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "70"]
+[Termination "normal"]
+[WhiteClock "0:02:38.733"]
+[BlackClock "0:02:43.738"]
+[TimeControl "300+0"]
+[ECO "D70"]
+[Opening "Neo-Grünfeld Defense"]
+[Variation "Goglidze Attack"]
+
+1. d4 Nf6 2. c4 g6 3. f3 d5 4. cxd5 Nxd5 5. e4 Nb6 6. Nc3 Bg7 7. Be3 O-O 8. a4
+a5 9. Rc1 e5 10. d5 Bh6 11. Bxh6 Qh4+ 12. g3 Qxh6 13. Nb5 Qe3+ 14. Be2 Nxa4 15.
+Ra1 Nxb2 16. Qc2 c6 17. Nc7 Ra7 18. Qxb2 b5 19. d6 a4 20. Qxe5 Nd7 21. Qb2 Nc5
+22. Ra3 Nb3 23. Ra2 b4 24. Qc2 a3 25. Qc4 Nc1 26. Ra1 b3 27. Rxc1 a2 28. Rd1
+a1=Q 29. Qd3 Qxd1+ 30. Qxd1 b2 31. Nh3 Bxh3 32. Nd5 cxd5 33. d7 Ra1 34. exd5
+Rxd1+ 35. Kxd1 Qc1# 0-1
+

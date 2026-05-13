@@ -1,0 +1,18 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "46"]
+[Termination "rules infraction"]
+[ECO "E90"]
+[Opening "King's Indian Defense"]
+[Variation "Normal Variation, Rare Defenses"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. h3 e5 7. d5 a5 8. Bd3 Na6
+9. O-O Bd7 10. Be3 Ne8 11. a3 f5 12. exf5 gxf5 13. Bg5 Bf6 14. Bxf6 Qxf6 15. Bc2
+Qh6 16. Ba4 Bxa4 17. Nxa4 Kh8 18. Qc2 f4 19. Qb3 Rg8 20. Ne1 Nf6 21. Qxb7 f3 22.
+Nxf3 Qxh3 23. Ne1 Rxg2+ ( 23... Rxg2+ 24. Nxg2 Rg8 ) 0-1
+

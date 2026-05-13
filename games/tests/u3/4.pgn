@@ -1,0 +1,15 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "14"]
+[Termination "rules infraction"]
+[ECO "B43"]
+[Opening "Sicilian Defense"]
+[Variation "Kan Variation, Wing Attack"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Nc3 b5 6. a3 Bb7 7. Bd3 Qb6 0-1
+

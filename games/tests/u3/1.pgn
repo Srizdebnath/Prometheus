@@ -1,0 +1,15 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus v1"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "14"]
+[Termination "rules infraction"]
+[ECO "C79"]
+[Opening "Ruy Lopez"]
+[Variation "Morphy Defense, Steinitz Deferred"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O d6 6. Re1 Bd7 7. c3 g6 0-1
+

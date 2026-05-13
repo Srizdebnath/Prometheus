@@ -1,11 +1,20 @@
-use std::io::{self, BufRead};
+use std::io::{self, BufRead, Write};
 use crate::board::{Board, Move, Square, PieceType, Color};
 use crate::search::Search;
 use std::time::Duration;
 
+/// Flush stdout - critical for UCI engines piped to GUIs.
+/// Without this, output can be buffered and the GUI never sees it.
+#[inline]
+fn flush_stdout() {
+    io::stdout().flush().ok();
+}
+
 pub fn uci_loop() {
     let mut board = Board::default();
     let mut search = Search::new();
+    let book = crate::openings::build_opening_book();
+    let mut uci_history: Vec<String> = Vec::new();
     let stdin = io::stdin();
     
     for line in stdin.lock().lines() {
@@ -15,13 +24,15 @@ pub fn uci_loop() {
         
         match tokens[0] {
             "uci" => {
-                println!("id name Prometheus 2.0");
+                println!("id name Prometheus v1");
                 println!("id author Srizdebnath");
                 println!("option name Hash type spin default 64 min 1 max 1024");
                 println!("uciok");
+                flush_stdout();
             },
             "isready" => {
                 println!("readyok");
+                flush_stdout();
             },
             "setoption" => {
                 // setoption name Hash value 128
@@ -34,11 +45,38 @@ pub fn uci_loop() {
             "ucinewgame" => {
                 board = Board::default();
                 search.tt.clear();
+                search.position_history.clear();
+                uci_history.clear();
             },
             "position" => {
-                parse_position(&mut board, &tokens);
+                parse_position(&mut board, &tokens, &mut search.position_history);
+                // Track UCI move history for the opening book
+                uci_history.clear();
+                if tokens.len() >= 2 && tokens[1] == "startpos" {
+                    if tokens.len() > 3 && tokens[2] == "moves" {
+                        for i in 3..tokens.len() {
+                            uci_history.push(tokens[i].to_string());
+                        }
+                    }
+                }
             },
             "go" => {
+                // If we're still in the opening, use the book
+                if uci_history.len() < 20 { // Don't use book too deep
+                    if let Some(book_move) = crate::openings::probe_book(&book, &uci_history) {
+                        // Validate that the book move is fully legal in the current position
+                        if let Some(m) = parse_move(&board, &book_move) {
+                            let mut test_board = board.clone();
+                            if test_board.make_move(m).is_some() {
+                                println!("bestmove {}", book_move);
+                                flush_stdout();
+                                continue;
+                            }
+                        }
+                        // Book move is illegal for this position — fall through to search
+                    }
+                }
+                
                 let (max_depth, time_limit) = parse_go(&tokens, &board);
                 
                 let (_score, best_move) = search.iterative_deepening(&mut board, max_depth, time_limit);
@@ -47,6 +85,7 @@ pub fn uci_loop() {
                 } else {
                     println!("bestmove 0000");
                 }
+                flush_stdout();
             },
             "quit" => break,
             "d" | "display" => {
@@ -159,11 +198,13 @@ fn parse_go(tokens: &[&str], board: &Board) -> (u8, Duration) {
     (depth, time_limit)
 }
 
-fn parse_position(board: &mut Board, tokens: &[&str]) {
+fn parse_position(board: &mut Board, tokens: &[&str], history: &mut Vec<u64>) {
     // position startpos moves e2e4 e7e5
     // position fen ... moves ...
     let mut i = 1;
     if i >= tokens.len() { return; }
+    
+    history.clear();
     
     if tokens[i] == "startpos" {
         *board = Board::default();
@@ -179,17 +220,20 @@ fn parse_position(board: &mut Board, tokens: &[&str]) {
         if let Some(b) = Board::from_fen(&fen) {
             *board = b;
         } else {
-            // fallback if FEN is invalid
             *board = Board::default();
         }
     }
+    
+    // Record starting position
+    history.push(board.zobrist_key);
     
     if i < tokens.len() && tokens[i] == "moves" {
         i += 1;
         while i < tokens.len() {
             let uci_move = tokens[i];
             if let Some(m) = parse_move(board, uci_move) {
-                board.make_move(m); // we assume UCI sends valid legal moves
+                board.make_move(m);
+                history.push(board.zobrist_key);
             }
             i += 1;
         }

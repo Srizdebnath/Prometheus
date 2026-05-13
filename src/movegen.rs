@@ -141,27 +141,48 @@ pub fn generate_moves(board: &Board, move_list: &mut MoveList) {
         add_moves!(sq, attacks, MOVE_FLAG_QUIET, MOVE_FLAG_CAPTURE);
     }
 
-    // Kings (Normal moves only for now)
+    // Kings (Normal moves + castling)
     let mut kings = board.pieces[us as usize][PieceType::King as usize];
     if kings != 0 {
         let sq = crate::board::pop_lsb(&mut kings);
         let attacks = king_attacks(sq);
         add_moves!(sq, attacks, MOVE_FLAG_QUIET, MOVE_FLAG_CAPTURE);
         
-        // Castling logic (pseudo-legal, assuming we don't check for squares under attack here)
-        if us == Color::White {
-            if (board.castling_rights & 1) != 0 && (all_pieces & 0x60) == 0 {
-                move_list.push(Move::new(sq, Square::new(6), MOVE_FLAG_KING_CASTLE));
-            }
-            if (board.castling_rights & 2) != 0 && (all_pieces & 0xE) == 0 {
-                move_list.push(Move::new(sq, Square::new(2), MOVE_FLAG_QUEEN_CASTLE));
-            }
-        } else {
-            if (board.castling_rights & 4) != 0 && (all_pieces & 0x6000000000000000) == 0 {
-                move_list.push(Move::new(sq, Square::new(62), MOVE_FLAG_KING_CASTLE));
-            }
-            if (board.castling_rights & 8) != 0 && (all_pieces & 0x0E00000000000000) == 0 {
-                move_list.push(Move::new(sq, Square::new(58), MOVE_FLAG_QUEEN_CASTLE));
+        // Castling: must check that king is NOT in check, and doesn't pass through
+        // or land on attacked squares. Also squares between must be empty.
+        let in_check = board.is_in_check(us);
+        
+        if !in_check {
+            if us == Color::White {
+                // White kingside: e1-g1, rook on h1, f1+g1 empty, e1+f1+g1 not attacked
+                if (board.castling_rights & 1) != 0 && (all_pieces & 0x60) == 0 {
+                    if !board.is_square_attacked(Square::new(5), them) &&
+                       !board.is_square_attacked(Square::new(6), them) {
+                        move_list.push(Move::new(sq, Square::new(6), MOVE_FLAG_KING_CASTLE));
+                    }
+                }
+                // White queenside: e1-c1, rook on a1, b1+c1+d1 empty, c1+d1+e1 not attacked
+                if (board.castling_rights & 2) != 0 && (all_pieces & 0xE) == 0 {
+                    if !board.is_square_attacked(Square::new(3), them) &&
+                       !board.is_square_attacked(Square::new(2), them) {
+                        move_list.push(Move::new(sq, Square::new(2), MOVE_FLAG_QUEEN_CASTLE));
+                    }
+                }
+            } else {
+                // Black kingside: e8-g8, rook on h8, f8+g8 empty, e8+f8+g8 not attacked
+                if (board.castling_rights & 4) != 0 && (all_pieces & 0x6000000000000000) == 0 {
+                    if !board.is_square_attacked(Square::new(61), them) &&
+                       !board.is_square_attacked(Square::new(62), them) {
+                        move_list.push(Move::new(sq, Square::new(62), MOVE_FLAG_KING_CASTLE));
+                    }
+                }
+                // Black queenside: e8-c8, rook on a8, b8+c8+d8 empty, c8+d8+e8 not attacked
+                if (board.castling_rights & 8) != 0 && (all_pieces & 0x0E00000000000000) == 0 {
+                    if !board.is_square_attacked(Square::new(59), them) &&
+                       !board.is_square_attacked(Square::new(58), them) {
+                        move_list.push(Move::new(sq, Square::new(58), MOVE_FLAG_QUEEN_CASTLE));
+                    }
+                }
             }
         }
     }
