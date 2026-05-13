@@ -15,7 +15,7 @@ pub struct TTEntry {
     pub score: i16,         // Evaluation score
     pub depth: u8,          // Search depth at which this entry was created
     pub node_type: u8,      // NodeType representation (Exact, LowerBound, UpperBound)
-    pub age: u8,            // Aging mechanism to overwrite old entries
+    pub age: u8,            // Search generation for aging
 }
 
 impl TTEntry {
@@ -42,6 +42,7 @@ impl TTEntry {
 pub struct TranspositionTable {
     entries: Vec<TTEntry>,
     mask: usize,
+    pub num_entries: usize,
 }
 
 impl TranspositionTable {
@@ -54,6 +55,7 @@ impl TranspositionTable {
         TranspositionTable {
             entries: vec![TTEntry::new(0, Move(0), 0, 0, NodeType::Exact, 0); num_entries],
             mask: num_entries - 1,
+            num_entries,
         }
     }
 
@@ -69,14 +71,20 @@ impl TranspositionTable {
         let index = (entry.key as usize) & self.mask;
         let current = &self.entries[index];
 
-        // Replacement scheme:
-        // 1. Always replace if the entry is empty (key == 0)
-        // 2. Replace if it's from a different position (key != current.key)
-        // 3. Replace if the new entry has greater or equal depth
-        // 4. (Optional) Age-based replacement
+        // Improved replacement scheme:
+        // 1. Always replace empty entries
+        // 2. Always replace if same position (we have newer/better info)
+        // 3. Replace if new entry is from a newer generation (current is stale)
+        // 4. Replace if new entry has greater depth (within same generation)
+        // 5. Prefer Exact nodes over bound nodes
         
-        // Simple depth-preferred replacement
-        if current.key == 0 || current.key != entry.key || entry.depth >= current.depth {
+        let should_replace = current.key == 0
+            || current.key == entry.key
+            || entry.age != current.age  // Different generation = stale, replace
+            || entry.depth + if entry.node_type == NodeType::Exact as u8 { 2 } else { 0 }
+               >= current.depth + if current.node_type == NodeType::Exact as u8 { 2 } else { 0 };
+        
+        if should_replace {
             self.entries[index] = entry;
         }
     }
@@ -89,5 +97,17 @@ impl TranspositionTable {
         } else {
             None
         }
+    }
+
+    /// Returns hashfull in permill (0-1000) for UCI info
+    pub fn hashfull(&self) -> u32 {
+        let sample_size = 1000.min(self.num_entries);
+        let mut used = 0u32;
+        for i in 0..sample_size {
+            if self.entries[i].key != 0 {
+                used += 1;
+            }
+        }
+        (used * 1000) / sample_size as u32
     }
 }

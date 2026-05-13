@@ -1,4 +1,5 @@
-use crate::board::{Board, Color, PieceType};
+use crate::board::{Board, Color, PieceType, Bitboard, popcount};
+use crate::attacks;
 
 const PAWN_MG_VAL: i32 = 82;
 const PAWN_EG_VAL: i32 = 94;
@@ -159,11 +160,108 @@ fn flip_sq(sq: usize, color: Color) -> usize {
     }
 }
 
+// File masks for pawn structure evaluation
+const FILE_MASK: [Bitboard; 8] = [
+    0x0101010101010101,
+    0x0202020202020202,
+    0x0404040404040404,
+    0x0808080808080808,
+    0x1010101010101010,
+    0x2020202020202020,
+    0x4040404040404040,
+    0x8080808080808080,
+];
+
+const ADJACENT_FILE_MASK: [Bitboard; 8] = [
+    FILE_MASK[1],
+    FILE_MASK[0] | FILE_MASK[2],
+    FILE_MASK[1] | FILE_MASK[3],
+    FILE_MASK[2] | FILE_MASK[4],
+    FILE_MASK[3] | FILE_MASK[5],
+    FILE_MASK[4] | FILE_MASK[6],
+    FILE_MASK[5] | FILE_MASK[7],
+    FILE_MASK[6],
+];
+
+// Rank masks
+const RANK_MASK: [Bitboard; 8] = [
+    0x00000000000000FF,
+    0x000000000000FF00,
+    0x0000000000FF0000,
+    0x00000000FF000000,
+    0x000000FF00000000,
+    0x0000FF0000000000,
+    0x00FF000000000000,
+    0xFF00000000000000,
+];
+
+// Passed pawn masks: squares in front of a pawn on adjacent + same files
+fn passed_pawn_mask(sq: usize, color: Color) -> Bitboard {
+    let file = sq % 8;
+    let rank = sq / 8;
+    let file_mask = FILE_MASK[file] | ADJACENT_FILE_MASK[file];
+    
+    match color {
+        Color::White => {
+            // All ranks above the pawn
+            let mut mask = 0u64;
+            for r in (rank + 1)..8 {
+                mask |= RANK_MASK[r];
+            }
+            file_mask & mask
+        },
+        Color::Black => {
+            let mut mask = 0u64;
+            for r in 0..rank {
+                mask |= RANK_MASK[r];
+            }
+            file_mask & mask
+        }
+    }
+}
+
+// Bonus/penalty values for structural features
+const DOUBLED_PAWN_PENALTY_MG: i32 = -10;
+const DOUBLED_PAWN_PENALTY_EG: i32 = -20;
+const ISOLATED_PAWN_PENALTY_MG: i32 = -15;
+const ISOLATED_PAWN_PENALTY_EG: i32 = -20;
+const PASSED_PAWN_BONUS_MG: [i32; 8] = [0, 5, 10, 20, 35, 60, 100, 0];
+const PASSED_PAWN_BONUS_EG: [i32; 8] = [0, 10, 20, 40, 70, 120, 200, 0];
+
+// Bishop pair bonus
+const BISHOP_PAIR_BONUS_MG: i32 = 30;
+const BISHOP_PAIR_BONUS_EG: i32 = 50;
+
+// Rook on open/semi-open file
+const ROOK_OPEN_FILE_MG: i32 = 20;
+const ROOK_OPEN_FILE_EG: i32 = 10;
+const ROOK_SEMI_OPEN_FILE_MG: i32 = 10;
+const ROOK_SEMI_OPEN_FILE_EG: i32 = 5;
+
+// Mobility bonus per square (knight, bishop, rook, queen)
+const KNIGHT_MOBILITY_MG: i32 = 4;
+const KNIGHT_MOBILITY_EG: i32 = 4;
+const BISHOP_MOBILITY_MG: i32 = 5;
+const BISHOP_MOBILITY_EG: i32 = 5;
+const ROOK_MOBILITY_MG: i32 = 2;
+const ROOK_MOBILITY_EG: i32 = 3;
+const QUEEN_MOBILITY_MG: i32 = 1;
+const QUEEN_MOBILITY_EG: i32 = 2;
+
+// King safety: penalty for open files near king, bonus for pawn shield
+const KING_PAWN_SHIELD_BONUS_MG: i32 = 10;
+
+// Tempo bonus for the side to move
+const TEMPO_BONUS: i32 = 15;
+
 pub fn evaluate(board: &Board) -> i32 {
     let mut mg_score = 0;
     let mut eg_score = 0;
     let mut phase = 0;
 
+    let all_occ = board.colors[Color::White as usize] | board.colors[Color::Black as usize];
+
+    // Piece-Square Tables
     let evaluate_piece = |board: &Board, pt: PieceType, color: Color, mg_val: i32, eg_val: i32, mg_table: &[i32; 64], eg_table: &[i32; 64], phase_weight: i32| -> (i32, i32, i32) {
         let mut bb = board.pieces[color as usize][pt as usize];
         let mut mg = 0;
@@ -203,6 +301,146 @@ pub fn evaluate(board: &Board) -> i32 {
         }
     }
 
+    // ---- Pawn Structure ----
+    for c in [Color::White, Color::Black] {
+        let our_pawns = board.pieces[c as usize][PieceType::Pawn as usize];
+        let their_pawns = board.pieces[c.opposite() as usize][PieceType::Pawn as usize];
+        let sign = if c == Color::White { 1 } else { -1 };
+        
+        let mut pawns_bb = our_pawns;
+        while pawns_bb != 0 {
+            let sq = crate::board::pop_lsb(&mut pawns_bb);
+            let file = sq.file() as usize;
+            let rank = sq.rank() as usize;
+            
+            // Doubled pawns: another pawn of ours on the same file
+            let pawns_on_file = popcount(our_pawns & FILE_MASK[file]);
+            if pawns_on_file > 1 {
+                mg_score += sign * DOUBLED_PAWN_PENALTY_MG;
+                eg_score += sign * DOUBLED_PAWN_PENALTY_EG;
+            }
+            
+            // Isolated pawns: no friendly pawns on adjacent files
+            if (our_pawns & ADJACENT_FILE_MASK[file]) == 0 {
+                mg_score += sign * ISOLATED_PAWN_PENALTY_MG;
+                eg_score += sign * ISOLATED_PAWN_PENALTY_EG;
+            }
+            
+            // Passed pawns: no enemy pawns blocking or attacking the path
+            let pp_mask = passed_pawn_mask(sq.0 as usize, c);
+            if (their_pawns & pp_mask) == 0 {
+                let relative_rank = if c == Color::White { rank } else { 7 - rank };
+                mg_score += sign * PASSED_PAWN_BONUS_MG[relative_rank];
+                eg_score += sign * PASSED_PAWN_BONUS_EG[relative_rank];
+            }
+        }
+    }
+
+    // ---- Bishop Pair ----
+    for c in [Color::White, Color::Black] {
+        let bishops = board.pieces[c as usize][PieceType::Bishop as usize];
+        if popcount(bishops) >= 2 {
+            let sign = if c == Color::White { 1 } else { -1 };
+            mg_score += sign * BISHOP_PAIR_BONUS_MG;
+            eg_score += sign * BISHOP_PAIR_BONUS_EG;
+        }
+    }
+
+    // ---- Rook on Open/Semi-Open Files ----
+    for c in [Color::White, Color::Black] {
+        let sign = if c == Color::White { 1 } else { -1 };
+        let our_pawns = board.pieces[c as usize][PieceType::Pawn as usize];
+        let their_pawns = board.pieces[c.opposite() as usize][PieceType::Pawn as usize];
+        
+        let mut rooks = board.pieces[c as usize][PieceType::Rook as usize];
+        while rooks != 0 {
+            let sq = crate::board::pop_lsb(&mut rooks);
+            let file = sq.file() as usize;
+            let file_bb = FILE_MASK[file];
+            
+            if (our_pawns & file_bb) == 0 {
+                if (their_pawns & file_bb) == 0 {
+                    mg_score += sign * ROOK_OPEN_FILE_MG;
+                    eg_score += sign * ROOK_OPEN_FILE_EG;
+                } else {
+                    mg_score += sign * ROOK_SEMI_OPEN_FILE_MG;
+                    eg_score += sign * ROOK_SEMI_OPEN_FILE_EG;
+                }
+            }
+        }
+    }
+
+    // ---- Mobility ----
+    for c in [Color::White, Color::Black] {
+        let sign = if c == Color::White { 1 } else { -1 };
+        let friendly = board.colors[c as usize];
+        let safe_squares = !friendly; // Can move to enemy or empty squares
+        
+        // Knight mobility
+        let mut knights = board.pieces[c as usize][PieceType::Knight as usize];
+        while knights != 0 {
+            let sq = crate::board::pop_lsb(&mut knights);
+            let moves = popcount(attacks::knight_attacks(sq) & safe_squares) as i32;
+            mg_score += sign * (moves - 4) * KNIGHT_MOBILITY_MG;
+            eg_score += sign * (moves - 4) * KNIGHT_MOBILITY_EG;
+        }
+        
+        // Bishop mobility
+        let mut bishops = board.pieces[c as usize][PieceType::Bishop as usize];
+        while bishops != 0 {
+            let sq = crate::board::pop_lsb(&mut bishops);
+            let moves = popcount(attacks::bishop_attacks(sq, all_occ) & safe_squares) as i32;
+            mg_score += sign * (moves - 6) * BISHOP_MOBILITY_MG;
+            eg_score += sign * (moves - 6) * BISHOP_MOBILITY_EG;
+        }
+        
+        // Rook mobility
+        let mut rooks = board.pieces[c as usize][PieceType::Rook as usize];
+        while rooks != 0 {
+            let sq = crate::board::pop_lsb(&mut rooks);
+            let moves = popcount(attacks::rook_attacks(sq, all_occ) & safe_squares) as i32;
+            mg_score += sign * (moves - 7) * ROOK_MOBILITY_MG;
+            eg_score += sign * (moves - 7) * ROOK_MOBILITY_EG;
+        }
+        
+        // Queen mobility (lower weight)
+        let mut queens = board.pieces[c as usize][PieceType::Queen as usize];
+        while queens != 0 {
+            let sq = crate::board::pop_lsb(&mut queens);
+            let moves = popcount(attacks::queen_attacks(sq, all_occ) & safe_squares) as i32;
+            mg_score += sign * (moves - 14) * QUEEN_MOBILITY_MG;
+            eg_score += sign * (moves - 14) * QUEEN_MOBILITY_EG;
+        }
+    }
+
+    // ---- King Safety (pawn shield, simple) ----
+    for c in [Color::White, Color::Black] {
+        let sign = if c == Color::White { 1 } else { -1 };
+        let king_bb = board.pieces[c as usize][PieceType::King as usize];
+        if king_bb == 0 { continue; }
+        let king_sq = crate::board::lsb(king_bb);
+        let king_file = king_sq.file() as usize;
+        let our_pawns = board.pieces[c as usize][PieceType::Pawn as usize];
+        
+        // Count pawns on the king's file and adjacent files in front of the king
+        let shield_files = if king_file == 0 {
+            FILE_MASK[0] | FILE_MASK[1]
+        } else if king_file == 7 {
+            FILE_MASK[6] | FILE_MASK[7]
+        } else {
+            FILE_MASK[king_file - 1] | FILE_MASK[king_file] | FILE_MASK[king_file + 1]
+        };
+        
+        // Only count pawns in front of the king (ranks 2-3 for white, 6-7 for black)
+        let shield_zone = match c {
+            Color::White => shield_files & (RANK_MASK[1] | RANK_MASK[2]),
+            Color::Black => shield_files & (RANK_MASK[5] | RANK_MASK[6]),
+        };
+        
+        let shield_count = popcount(our_pawns & shield_zone) as i32;
+        mg_score += sign * shield_count * KING_PAWN_SHIELD_BONUS_MG;
+    }
+
     // Cap phase at TOTAL_PHASE
     if phase > TOTAL_PHASE {
         phase = TOTAL_PHASE;
@@ -214,10 +452,13 @@ pub fn evaluate(board: &Board) -> i32 {
     
     let score = (mg_score * mg_weight + eg_score * eg_weight) / TOTAL_PHASE;
 
+    // Tempo bonus for the side to move
+    let tempo = TEMPO_BONUS;
+
     // Perspective (positive score means side to move is winning)
     if board.side_to_move == Color::White {
-        score
+        score + tempo
     } else {
-        -score
+        -score + tempo
     }
 }

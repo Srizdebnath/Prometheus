@@ -1,0 +1,20 @@
+[Event "Local Event"]
+[Site "Local Site"]
+[Date "2026.05.13"]
+[Round "1"]
+[White "Prometheus 2.0"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[PlyCount "72"]
+[Termination "normal"]
+[ECO "A11"]
+[Opening "English Opening"]
+[Variation "Caro-Kann Defensive System"]
+
+1. c4 c6 2. Nf3 d5 3. e3 Nf6 4. Nc3 a6 5. Qc2 g6 6. d4 Bg7 7. Bd3 O-O 8. O-O Bg4
+9. Ne5 Be6 10. c5 Nbd7 11. f4 Nxe5 12. fxe5 Ng4 13. Bd2 f6 14. h3 Nh6 15. exf6
+Rxf6 16. Rad1 Qd7 17. Na4 Raf8 18. Rxf6 Bxf6 19. Bxg6 Bxh3 20. Bxh7+ Kh8 21. Rf1
+Bxg2 22. Bf5 e6 23. Rf2 Nxf5 24. Rxg2 Nh4 25. Rg4 Bg5 26. Qd1 Qf7 27. Rxg5 Nf3+
+28. Kg2 Nxg5 29. Qe2 Qf5 30. Qh5+ Kg7 31. Be1 Qf1+ 32. Kg3 Qg1+ 33. Kh4 Qh1+ 34.
+Kg3 Qxh5 35. Kg2 Qh3+ 36. Kg1 Rf1# 0-1
+
