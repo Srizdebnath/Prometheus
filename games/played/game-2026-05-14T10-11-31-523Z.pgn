@@ -1,0 +1,11 @@
+[Event "Prometheus Arena"]
+[Site "localhost"]
+[Date "2026.05.14"]
+[Round "1"]
+[White "Ansh"]
+[Black "Prometheus v1"]
+[Result "0-1"]
+[Time "15:41:31"]
+[TimeControl "600"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Bg5 c5 5. a3 Bxc3+ 6. bxc3 Qa5 7. Bd2 Ne4 8. Qb3 cxd4 9. Nf3 dxc3 10. Bxc3 Nxc3 11. e3 Na6 12. Bd3 Nc5 13. Qb4 Nxd3+ 14. Kd2 Nxb4 15. axb4 Qxb4 16. Rac1 Ne4+ 17. Ke2 Qb2+ 18. Kd3 Nxf2# 0-1

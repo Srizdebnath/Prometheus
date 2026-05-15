@@ -1,0 +1,2319 @@
+[Event "Modern"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern"]
+
+1.d4 d6 2.c4 g6 3.Nc3 Bg7 4.e4 *
+
+[Event "Semi-Benoni"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Semi-Benoni"]
+
+1.d4 c5 2.d5 e5 *
+
+[Event "Trompowsky, 2...Ne4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Trompowsky, 2...Ne4"]
+
+1.d4 Nf6 2.Bg5 Ne4 *
+
+[Event "Trompowsky, 2...e6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Trompowsky, 2...e6"]
+
+1.d4 Nf6 2.Bg5 e6 *
+
+[Event "Trompowsky, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Trompowsky, Other"]
+
+1.d4 Nf6 2.Bg5 *
+
+[Event "Torre, 2...e6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Torre, 2...e6"]
+
+1.d4 Nf6 2.Nf3 e6 3.Bg5 *
+
+[Event "Torre, 2...g6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Torre, 2...g6"]
+
+1.d4 Nf6 2.Nf3 g6 3.Bg5 *
+
+[Event "London System, 2...e6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "London System, 2...e6"]
+
+1.d4 Nf6 2.Nf3 e6 3.Bf4 *
+
+[Event "London System, 2...g6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "London System, 2...g6"]
+
+1.d4 Nf6 2.Nf3 g6 3.Bf4 *
+
+[Event "Catalan, 3...Bb4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Catalan, 3...Bb4"]
+
+1.d4 Nf6 2.c4 e6 3.g3 Bb4+ *
+
+[Event "Catalan, 3...c5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Catalan, 3...c5"]
+
+1.d4 Nf6 2.c4 e6 3.g3 c5 *
+
+[Event "Catalan, Open"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Catalan, Open"]
+
+1.d4 Nf6 2.c4 e6 3.g3 d5 4.Bg2 dxc4 *
+
+[Event "Catalan, Closed"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Catalan, Closed"]
+
+1.d4 Nf6 2.c4 e6 3.g3 d5 4.Bg2 Be7 5.Nf3 *
+
+[Event "Black Knights Tango"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Black Knights Tango"]
+
+1.d4 Nf6 2.c4 Nc6 *
+
+[Event "Budapest Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Budapest Gambit"]
+
+1.d4 Nf6 2.c4 e5 *
+
+[Event "Old Indian"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Old Indian"]
+
+1.d4 Nf6 2.c4 d6 *
+
+[Event "Czech Benoni"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Czech Benoni"]
+
+1.d4 Nf6 2.c4 c5 3.d5 e5 4.Nc3 d6 *
+
+[Event "Benko (Volga) Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Benko (Volga) Gambit"]
+
+1.d4 Nf6 2.c4 c5 3.d5 b5 *
+
+[Event "Modern Benoni, 6.Nf3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern Benoni, 6.Nf3"]
+
+1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.Nf3 *
+
+[Event "Modern Benoni, 6.e4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern Benoni, 6.e4"]
+
+1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 *
+
+[Event "Dutch, Leningrad"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dutch, Leningrad"]
+
+1.d4 f5 2.c4 Nf6 3.g3 g6 4.Bg2 Bg7 5.Nf3 O-O 6.O-O *
+
+[Event "Dutch, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dutch, Classical"]
+
+1.d4 f5 2.c4 Nf6 3.g3 e6 4.Bg2 *
+
+[Event "Dutch, 3.Nc3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dutch, 3.Nc3"]
+
+1.d4 f5 2.c4 Nf6 3.Nc3 *
+
+[Event "Dutch, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dutch, Other"]
+
+1.d4 f5 *
+
+[Event "Grunfeld, Fianchetto"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Grunfeld, Fianchetto"]
+
+1.d4 Nf6 2.c4 g6 3.g3 d5 4.Bg2 Bg7 5.Nf3 O-O 6.O-O *
+
+[Event "Grunfeld, 4.Nf3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Grunfeld, 4.Nf3"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 d5 4.Nf3 *
+
+[Event "Grunfeld, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Grunfeld, Other"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 d5 *
+
+[Event "Grunfeld, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Grunfeld, Exchange"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 d5 4.cxd5 Nxd5 5.e4 Nxc3 6.bxc3 Bg7 *
+
+[Event "Bogo-Indian, 4.Bd2"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Bogo-Indian, 4.Bd2"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+ 4.Bd2 *
+
+[Event "Bogo-Indian, 4.Nbd2"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Bogo-Indian, 4.Nbd2"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+ 4.Nbd2 *
+
+[Event "Queen's Indian, 4.a3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian, 4.a3"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.a3 *
+
+[Event "Queen's Indian, 4.Nc3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian, 4.Nc3"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3 *
+
+[Event "Queen's Indian, 4.e3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian, 4.e3"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.e3 *
+
+[Event "Queen's Indian, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian, Other"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6 *
+
+[Event "Queen's Indian, 4.g3 Ba6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian, 4.g3 Ba6"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.g3 Ba6 *
+
+[Event "Queen's Indian, 4.g3 Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian, 4.g3 Other"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.g3 *
+
+[Event "Nimzo-Indian, 4.Nf3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, 4.Nf3"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.Nf3 *
+
+[Event "Nimzo-Indian, Saemisch"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Saemisch"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.a3 *
+
+[Event "Nimzo-Indian, Leningrad"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Leningrad"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.Bg5 *
+
+[Event "Nimzo-Indian, 4.f3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, 4.f3"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.f3 *
+
+[Event "Nimzo-Indian, Other 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Other 4th moves"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 *
+
+[Event "Nimzo-Indian, Classical, 4...O-O"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Classical, 4...O-O"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.Qc2 O-O *
+
+[Event "Nimzo-Indian, Classical, 4...c5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Classical, 4...c5"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.Qc2 c5 *
+
+[Event "Nimzo-Indian, Classical, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Classical, Other"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.Qc2 *
+
+[Event "Nimzo-Indian, Rubinstein, 4...O-O"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Rubinstein, 4...O-O"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O *
+
+[Event "Nimzo-Indian, Rubinstein, 4...c5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Rubinstein, 4...c5"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 c5 *
+
+[Event "Nimzo-Indian, Rubinstein, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo-Indian, Rubinstein, Other"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 *
+
+[Event "King's Indian, Averbakh"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Averbakh"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.Be2 O-O 6.Bg5 *
+
+[Event "King's Indian, Fianchetto"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Fianchetto"]
+
+1.c4 Nf6 2.d4 g6 3.g3 Bg7 4.Bg2 d6 5.Nf3 O-O *
+
+[Event "King's Indian, 4 Pawns Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, 4 Pawns Attack"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.f4 *
+
+[Event "King's Indian, Saemisch"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Saemisch"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.f3 *
+
+[Event "King's Indian, Classical Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Classical Main Line"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.Nf3 O-O 6.Be2 e5 7.O-O Nc6 *
+
+[Event "King's Indian, Classical Other 7th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Classical Other 7th moves"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.Nf3 O-O 6.Be2 e5 *
+
+[Event "King's Indian, Classical Petrosian"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Classical Petrosian"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.Nf3 O-O 6.Be2 e5 7.d5 *
+
+[Event "King's Indian, Classical Other 5th and 6th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian, Classical Other 5th and 6th moves"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.Nf3 *
+
+[Event "Hodgson Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Hodgson Attack"]
+
+1.d4 d5 2.Bg5 *
+
+[Event "Colle System"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Colle System"]
+
+1.d4 d5 2.Nf3 Nf6 3.e3 *
+
+[Event "Queen's Gambit Symmetrical and Baltic"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Symmetrical and Baltic"]
+
+1.d4 d5 2.c4 c5 *
+
+[Event "Queen's Gambit Albin Counter-Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Albin Counter-Gambit"]
+
+1.d4 d5 2.c4 e5 *
+
+[Event "Queen's Gambit Chigorin"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Chigorin"]
+
+1.d4 d5 2.c4 Nc6 *
+
+[Event "Queen's Gambit Slav, Other 3rd and 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Slav, Other 3rd and 4th moves"]
+
+1.d4 d5 2.c4 c6 3.Nf3 Nf6 *
+
+[Event "Queen's Gambit Slav, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Slav, Exchange"]
+
+1.d4 d5 2.c4 c6 3.Nf3 Nf6 4.cxd5 cxd5 5.Nc3 *
+
+[Event "Queen's Gambit Slav, 4...a6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Slav, 4...a6"]
+
+1.d4 d5 2.c4 c6 3.Nf3 Nf6 4.Nc3 a6 *
+
+[Event "Queen's Gambit Slav, Other 5th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Slav, Other 5th moves"]
+
+1.d4 d5 2.c4 c6 3.Nf3 Nf6 4.Nc3 dxc4 *
+
+[Event "Queen's Gambit Slav, Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Slav, Main Line"]
+
+1.d4 d5 2.c4 c6 3.Nf3 Nf6 4.Nc3 dxc4 5.a4 Bf5 *
+
+[Event "Queen's Gambit Accepted, 3.e4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Accepted, 3.e4"]
+
+1.d4 d5 2.c4 dxc4 3.e4 *
+
+[Event "Queen's Gambit Accepted, Other 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Accepted, Other 3rd moves"]
+
+1.d4 d5 2.c4 dxc4 3.Nf3 *
+
+[Event "Queen's Gambit Accepted, Other 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Accepted, Other 4th moves"]
+
+1.d4 d5 2.c4 dxc4 3.Nf3 Nf6 *
+
+[Event "Queen's Gambit Accepted, Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Accepted, Main Line"]
+
+1.d4 d5 2.c4 dxc4 3.Nf3 Nf6 4.e3 e6 5.Bxc4 c5 *
+
+[Event "Queen's Gambit Declined, Other 3rd and 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Other 3rd and 4th moves"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 *
+
+[Event "Queen's Gambit Declined, Tarrasch"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Tarrasch"]
+
+1.d4 d5 2.c4 e6 3.Nc3 c5 *
+
+[Event "Queen's Gambit Declined, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Exchange"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.cxd5 *
+
+[Event "Queen's Gambit Declined, 5.Bf4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, 5.Bf4"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Nf3 Be7 5.Bf4 *
+
+[Event "Queen's Gambit Declined, Semi-Tarrasch, 5.e3 Nc6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Semi-Tarrasch, 5.e3 Nc6"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Nf3 c5 5.e3 Nc6 *
+
+[Event "Queen's Gambit Declined, Semi-Tarrasch Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Semi-Tarrasch Main Line"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Nf3 c5 5.cxd5 *
+
+[Event "Queen's Gambit Declined, Semi-Slav Other 5th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Semi-Slav Other 5th moves"]
+
+1.d4 d5 2.c4 e6 3.Nf3 Nf6 4.Nc3 c6 *
+
+[Event "Queen's Gambit Declined, Semi-Slav Botvinnik"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Semi-Slav Botvinnik"]
+
+1.d4 d5 2.c4 e6 3.Nf3 Nf6 4.Nc3 c6 5.Bg5 *
+
+[Event "Queen's Gambit Declined, Semi-Slav Meran"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Semi-Slav Meran"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Nf3 c6 5.e3 *
+
+[Event "Queen's Gambit Declined, Orthodox Other 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Orthodox Other 4th moves"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Bg5 *
+
+[Event "Queen's Gambit Declined, Orthodox Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit Declined, Orthodox Main Line"]
+
+1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Bg5 Be7 *
+
+[Event "Owen Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Owen Defense"]
+
+1.e4 b6 *
+
+[Event "Nimzowitsch Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzowitsch Defense"]
+
+1.e4 Nc6 *
+
+[Event "Scandinavian, 3...Qd6 and 3...Qd8"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scandinavian, 3...Qd6 and 3...Qd8"]
+
+1.e4 d5 2.exd5 Qxd5 3.Nc3 Qd6 *
+
+[Event "Scandinavian, 3...Qa5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scandinavian, 3...Qa5"]
+
+1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 *
+
+[Event "Scandinavian, 2...Nf6 3.d4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scandinavian, 2...Nf6 3.d4"]
+
+1.e4 d5 2.exd5 Nf6 3.d4 *
+
+[Event "Scandinavian, 2...Nf6 Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scandinavian, 2...Nf6 Other"]
+
+1.e4 d5 2.exd5 Nf6 *
+
+[Event "Alekhine, 2.Nc3 d5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Alekhine, 2.Nc3 d5"]
+
+1.e4 Nf6 2.Nc3 d5 *
+
+[Event "Alekhine, Other 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Alekhine, Other 3rd moves"]
+
+1.e4 Nf6 2.e5 Nd5 *
+
+[Event "Alekhine, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Alekhine, Exchange"]
+
+1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.c4 Nb6 5.exd6 *
+
+[Event "Alekhine, Four Pawns Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Alekhine, Four Pawns Attack"]
+
+1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.c4 Nb6 5.f4 *
+
+[Event "Alekhine, Modern"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Alekhine, Modern"]
+
+1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 *
+
+[Event "Modern, 3.Nf3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern, 3.Nf3"]
+
+1.e4 g6 2.d4 Bg7 3.Nf3 *
+
+[Event "Modern, 3.Nc3 d6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern, 3.Nc3 d6"]
+
+1.e4 g6 2.d4 Bg7 3.Nc3 d6 *
+
+[Event "Modern, 3.Nc3 c6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern, 3.Nc3 c6"]
+
+1.e4 g6 2.d4 Bg7 3.Nc3 c6 *
+
+[Event "Modern, 3.Nc3 Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern, 3.Nc3 Other"]
+
+1.e4 g6 2.d4 Bg7 3.Nc3 *
+
+[Event "Modern, Other 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern, Other 3rd moves"]
+
+1.e4 g6 2.d4 Bg7 *
+
+[Event "Pirc, Other White 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Pirc, Other White 3rd moves"]
+
+1.e4 d6 2.d4 Nf6 *
+
+[Event "Pirc, Other Black 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Pirc, Other Black 3rd moves"]
+
+1.e4 d6 2.d4 Nf6 3.Nc3 *
+
+[Event "Pirc, Austrian Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Pirc, Austrian Attack"]
+
+1.e4 d6 2.d4 Nf6 3.Nc3 g6 4.f4 *
+
+[Event "Pirc, Other White 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Pirc, Other White 4th moves"]
+
+1.e4 d6 2.d4 Nf6 3.Nc3 g6 *
+
+[Event "Pirc, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Pirc, Classical"]
+
+1.e4 d6 2.d4 Nf6 3.Nc3 g6 4.Nf3 *
+
+[Event "Caro-Kann, 2.c4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, 2.c4"]
+
+1.e4 c6 2.c4 *
+
+[Event "Caro-Kann, Two Knights"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, Two Knights"]
+
+1.e4 c6 2.Nc3 d5 3.Nf3 *
+
+[Event "Caro-Kann, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, Exchange"]
+
+1.e4 c6 2.d4 d5 3.exd5 cxd5 4.Bd3 *
+
+[Event "Caro-Kann, Panov-Botvinnik Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, Panov-Botvinnik Attack"]
+
+1.e4 c6 2.d4 d5 3.exd5 cxd5 4.c4 *
+
+[Event "Caro-Kann, Advance"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, Advance"]
+
+1.e4 c6 2.d4 d5 3.e5 *
+
+[Event "Caro-Kann, 4...Nf6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, 4...Nf6"]
+
+1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 Nf6 *
+
+[Event "Caro-Kann, 4...Nd7"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, 4...Nd7"]
+
+1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 Nd7 *
+
+[Event "Caro-Kann, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann, Classical"]
+
+1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 Bf5 *
+
+[Event "French, King's Indian Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, King's Indian Attack"]
+
+1.e4 e6 2.d3 *
+
+[Event "French, Other 2nd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Other 2nd moves"]
+
+1.e4 e6 *
+
+[Event "French, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Exchange"]
+
+1.e4 e6 2.d4 d5 3.exd5 *
+
+[Event "French, Schlechter"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Schlechter"]
+
+1.e4 e6 2.d4 d5 3.Bd3 *
+
+[Event "French, Advance"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Advance"]
+
+1.e4 e6 2.d4 d5 3.e5 c5 4.c3 *
+
+[Event "French, Tarrasch Other 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Tarrasch Other 3rd moves"]
+
+1.e4 e6 2.d4 d5 3.Nd2 *
+
+[Event "French, Tarrasch, 3...c5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Tarrasch, 3...c5"]
+
+1.e4 e6 2.d4 d5 3.Nd2 c5 *
+
+[Event "French, Tarrasch, 3...Nf6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Tarrasch, 3...Nf6"]
+
+1.e4 e6 2.d4 d5 3.Nd2 Nf6 *
+
+[Event "French, Rubinstein"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Rubinstein"]
+
+1.e4 e6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 *
+
+[Event "French, Winawer Other White 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Winawer Other White 4th moves"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Bb4 *
+
+[Event "French, Winawer Other Black 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Winawer Other Black 4th moves"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Bb4 4.e5 *
+
+[Event "French, Winawer, Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Winawer, Main Line"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Bb4 4.e5 c5 *
+
+[Event "French, Steinitz"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Steinitz"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Nf6 4.e5 *
+
+[Event "French, MacCutcheon"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, MacCutcheon"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Nf6 4.Bg5 Bb4 *
+
+[Event "French, Burn"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Burn"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Nf6 4.Bg5 dxe4 *
+
+[Event "French, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French, Classical"]
+
+1.e4 e6 2.d4 d5 3.Nc3 Nf6 4.Bg5 Be7 *
+
+[Event "Sicilian, Miscellaneous 2nd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Miscellaneous 2nd moves"]
+
+1.e4 c5 *
+
+[Event "Sicilian, 2.f4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2.f4"]
+
+1.e4 c5 2.f4 *
+
+[Event "Sicilian, Smith-Morra Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Smith-Morra Gambit"]
+
+1.e4 c5 2.d4 cxd4 3.c3 *
+
+[Event "Sicilian, Alapin Other 2nd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Alapin Other 2nd moves"]
+
+1.e4 c5 2.c3 *
+
+[Event "Sicilian, Alapin, 2...Nf6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Alapin, 2...Nf6"]
+
+1.e4 c5 2.c3 Nf6 *
+
+[Event "Sicilian, Alapin, 2...d5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Alapin, 2...d5"]
+
+1.e4 c5 2.c3 d5 *
+
+[Event "Sicilian, 2.Nc3 e6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2.Nc3 e6"]
+
+1.e4 c5 2.Nc3 e6 *
+
+[Event "Sicilian, 2.Nc3 d6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2.Nc3 d6"]
+
+1.e4 c5 2.Nc3 d6 *
+
+[Event "Sicilian, Grand Prix Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Grand Prix Attack"]
+
+1.e4 c5 2.Nc3 Nc6 3.f4 *
+
+[Event "Sicilian, Closed Other 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Closed Other 3rd moves"]
+
+1.e4 c5 2.Nc3 Nc6 *
+
+[Event "Sicilian, Closed Main Line"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Closed Main Line"]
+
+1.e4 c5 2.Nc3 Nc6 3.g3 *
+
+[Event "Sicilian, 2.Nf3 Other 2nd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2.Nf3 Other 2nd moves"]
+
+1.e4 c5 2.Nf3 *
+
+[Event "Sicilian, Rossolimo"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Rossolimo"]
+
+1.e4 c5 2.Nf3 Nc6 3.Bb5 *
+
+[Event "Sicilian, 2...Nc6, 4...Qc7 and 4...Qb6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2...Nc6, 4...Qc7 and 4...Qb6"]
+
+1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 *
+
+[Event "Sicilian, Lowenthal"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Lowenthal"]
+
+1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 e5 *
+
+[Event "Sicilian, Sveshnikov"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Sveshnikov"]
+
+1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 e5 5.Nb5 d6 *
+
+[Event "Sicilian, 2...e6, 3...d6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2...e6, 3...d6"]
+
+1.e4 c5 2.Nf3 e6 3.d4 cxd4 4.Nxd4 d6 *
+
+[Event "Sicilian, Kan"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Kan"]
+
+1.e4 c5 2.Nf3 e6 3.d4 cxd4 4.Nxd4 a6 *
+
+[Event "Sicilian, Taimanov"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Taimanov"]
+
+1.e4 c5 2.Nf3 e6 3.d4 cxd4 4.Nxd4 Nc6 *
+
+[Event "Sicilian, Paulsen Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Paulsen Other"]
+
+1.e4 c5 2.Nf3 e6 3.d4 cxd4 4.Nxd4 *
+
+[Event "Sicilian, 2...d6, Other 3rd moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 2...d6, Other 3rd moves"]
+
+1.e4 c5 2.Nf3 d6 *
+
+[Event "Sicilian, Dragon, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Dragon, Classical"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6 6.Be2 *
+
+[Event "Sicilian, Dragon, Yugoslav Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Dragon, Yugoslav Attack"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6 6.Be3 *
+
+[Event "Sicilian, Dragon, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Dragon, Other"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6 *
+
+[Event "Sicilian, Najdorf, 6.Bg5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Najdorf, 6.Bg5"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.Bg5 *
+
+[Event "Sicilian, Najdorf, 6.Be3"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Najdorf, 6.Be3"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.Be3 *
+
+[Event "Sicilian, Najdorf, 6.Be2"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Najdorf, 6.Be2"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.Be2 *
+
+[Event "Sicilian, Najdorf, 6.Bc4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Najdorf, 6.Bc4"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.Bc4 *
+
+[Event "Sicilian, Najdorf, 6.f4"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Najdorf, 6.f4"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.f4 *
+
+[Event "Sicilian, Najdorf, Other 6th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Najdorf, Other 6th moves"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 *
+
+[Event "Sicilian, Scheveningen, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Scheveningen, Classical"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e6 6.Be2 *
+
+[Event "Sicilian, Scheveningen, Keres Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Scheveningen, Keres Attack"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e6 6.g4 *
+
+[Event "Sicilian, Scheveningen, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Scheveningen, Other"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e6 *
+
+[Event "Sicilian, 5.Nc3 Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, 5.Nc3 Other"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 *
+
+[Event "Sicilian, Other 5th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Other 5th moves"]
+
+1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 *
+
+[Event "Italian Game, Giuoco Piano"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Italian Game, Giuoco Piano"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 *
+
+[Event "Italian Game, Two Knights"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Italian Game, Two Knights"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4 Nf6 *
+
+[Event "Italian Game, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Italian Game, Other"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4 *
+
+[Event "Ruy Lopez, 3...a6, 4...Nf6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, 3...a6, 4...Nf6"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 *
+
+[Event "Ruy Lopez, Berlin"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Berlin"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 *
+
+[Event "Ruy Lopez, Exchange"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Exchange"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6 *
+
+[Event "Ruy Lopez, Other 3rd and 4th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Other 3rd and 4th moves"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 *
+
+[Event "Ruy Lopez, Open, 8...Be6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Open, 8...Be6"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Nxe4 6.d4 b5 7.Bb3 d5 8.dxe5 Be6 *
+
+[Event "Ruy Lopez, Open, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Open, Other"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Nxe4 6.d4 b5 7.Bb3 d5 8.dxe5 *
+
+[Event "Ruy Lopez, Closed, 9...Bb7"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Closed, 9...Bb7"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 d6 8.c3 O-O 9.h3 Bb7 *
+
+[Event "Ruy Lopez, Closed, 9...Na5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Closed, 9...Na5"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 d6 8.c3 O-O 9.h3 Na5 *
+
+[Event "Ruy Lopez, Closed, Other 9th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Closed, Other 9th moves"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 d6 8.c3 O-O 9.h3 *
+
+[Event "Ruy Lopez, Anti-Marshall"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Anti-Marshall"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 O-O 8.a4 *
+
+[Event "Ruy Lopez, Marshall Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Marshall Attack"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 O-O 8.c3 d5 *
+
+[Event "Ruy Lopez, Closed Other 8th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Closed Other 8th moves"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 O-O 8.c3 *
+
+[Event "Ruy Lopez, 6...b5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, 6...b5"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 *
+
+[Event "Ruy Lopez, Other 6th moves"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Other 6th moves"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 *
+
+[Event "Scotch Game, 4...Bc5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scotch Game, 4...Bc5"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 Bc5 *
+
+[Event "Scotch Game, 4...Nf6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scotch Game, 4...Nf6"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 Nf6 *
+
+[Event "Scotch Game, Other"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scotch Game, Other"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 *
+
+[Event "Four Knights"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Four Knights"]
+
+1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 *
+
+[Event "Vienna Game"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Vienna Game"]
+
+1.e4 e5 2.Nc3 *
+
+[Event "Latvian Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Latvian Gambit"]
+
+1.e4 e5 2.Nf3 f5 *
+
+[Event "Petrov Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Petrov Defense"]
+
+1.e4 e5 2.Nf3 Nf6 *
+
+[Event "King's Gambit Accepted"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Gambit Accepted"]
+
+1.e4 e5 2.f4 exf4 *
+
+[Event "King's Gambit Declined"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Gambit Declined"]
+
+1.e4 e5 2.f4 d5 *
+
+[Event "English, 1...e5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, 1...e5"]
+
+1.c4 e5 *
+
+[Event "English, 1...c5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, 1...c5"]
+
+1.c4 c5 *
+
+[Event "English, 1...e6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, 1...e6"]
+
+1.c4 e6 *
+
+[Event "English, 1...Nf6"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, 1...Nf6"]
+
+1.c4 Nf6 *
+
+[Event "English, Symmetrical, 4 Knights"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, Symmetrical, 4 Knights"]
+
+1.c4 c5 2.Nc3 Nc6 3.Nf3 Nf6 4.g3 g6 5.Bg2 Bg7 6.O-O O-O *
+
+[Event "English, Symmetrical, Hedgehog"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, Symmetrical, Hedgehog"]
+
+1.c4 c5 2.Nf3 Nf6 3.Nc3 e6 4.g3 b6 5.Bg2 Bb7 *
+
+[Event "English, Reversed Sicilian"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, Reversed Sicilian"]
+
+1.c4 e5 2.Nc3 *
+
+[Event "King's Indian Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian Attack"]
+
+1.Nf3 d5 2.g3 *
+
+[Event "Reti Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Reti Opening"]
+
+1.Nf3 d5 2.c4 *
+
+[Event "Bird's Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Bird's Opening"]
+
+1.f4 *
+
+[Event "Larsen's Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Larsen's Opening"]
+
+1.b3 *
+
+[Event "Sokolsky / Polish Opening (Orangutan)"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sokolsky / Polish Opening (Orangutan)"]
+
+1.b4 *
+
+[Event "Polish Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Polish Defense"]
+
+1.d4 b5 *
+
+[Event "Bishop's Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Bishop's Opening"]
+
+1.e4 e5 2.Bc4 *
+
+[Event "Center Game"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Center Game"]
+
+1.e4 e5 2.d4 exd4 3.Qxd4 *
+
+[Event "Scotch Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scotch Gambit"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Bc4 *
+
+[Event "Evans Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Evans Gambit"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4 *
+
+[Event "Giuoco Pianissimo"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Giuoco Pianissimo"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.c3 Nf6 5.d3 *
+
+[Event "Ponziani Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ponziani Opening"]
+
+1.e4 e5 2.Nf3 Nc6 3.c3 *
+
+[Event "Philidor Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Philidor Defense"]
+
+1.e4 e5 2.Nf3 d6 *
+
+[Event "King's Gambit, Bishop's Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Gambit, Bishop's Gambit"]
+
+1.e4 e5 2.f4 exf4 3.Bc4 *
+
+[Event "King's Gambit, King's Knight Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Gambit, King's Knight Gambit"]
+
+1.e4 e5 2.f4 exf4 3.Nf3 *
+
+[Event "Ruy Lopez, Morphy Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Morphy Defense"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 *
+
+[Event "Ruy Lopez, Schliemann"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Schliemann"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 f5 *
+
+[Event "Ruy Lopez, Bird's Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez, Bird's Defense"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5 Nd4 *
+
+[Event "Three Knights"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Three Knights"]
+
+1.e4 e5 2.Nf3 Nc6 3.Nc3 *
+
+[Event "Hungarian Defense"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Hungarian Defense"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4 Be7 *
+
+[Event "Elephant Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Elephant Gambit"]
+
+1.e4 e5 2.Nf3 d5 *
+
+[Event "Stonewall Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Stonewall Attack"]
+
+1.d4 d5 2.e3 Nf6 3.Bd3 c5 4.c3 Nc6 5.f4 *
+
+[Event "Blackmar-Diemer Gambit"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Blackmar-Diemer Gambit"]
+
+1.d4 d5 2.e4 dxe4 3.Nc3 Nf6 4.f3 *
+
+[Event "Veresov Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Veresov Opening"]
+
+1.d4 Nf6 2.Nc3 d5 3.Bg5 *
+
+[Event "Dutch, Stonewall"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dutch, Stonewall"]
+
+1.d4 f5 2.c4 Nf6 3.g3 e6 4.Bg2 d5 5.Nf3 c6 *
+
+[Event "Colle-Zukertort"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Colle-Zukertort"]
+
+1.d4 d5 2.Nf3 Nf6 3.e3 e6 4.Bd3 c5 5.b3 *
+
+[Event "London System vs d5"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "London System vs d5"]
+
+1.d4 d5 2.Nf3 Nf6 3.Bf4 e6 4.e3 *
+
+[Event "Jobava London"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Jobava London"]
+
+1.d4 d5 2.Nc3 Nf6 3.Bf4 *
+
+[Event "Reti, King's Indian"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Reti, King's Indian"]
+
+1.Nf3 Nf6 2.c4 g6 3.g3 Bg7 4.Bg2 O-O *
+
+[Event "Catalan Setup"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Catalan Setup"]
+
+1.d4 Nf6 2.c4 e6 3.g3 d5 4.Bg2 Be7 5.Nf3 O-O 6.O-O *
+
+[Event "Sicilian, Accelerated Dragon"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Accelerated Dragon"]
+
+1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 g6 *
+
+[Event "Sicilian, Classical"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian, Classical"]
+
+1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 d6 *
+
+[Event "Grob Attack"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Grob Attack"]
+
+1.g4 *
+
+[Event "Van't Kruijs Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Van't Kruijs Opening"]
+
+1.e3 *
+
+[Event "Dunst Opening"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dunst Opening"]
+
+1.Nc3 *
+
+[Event "English, Four Knights vs KID"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, Four Knights vs KID"]
+
+1.c4 Nf6 2.Nc3 g6 3.g3 Bg7 4.Bg2 O-O 5.Nf3 d6 *
+
+[Event "English, Symmetrical, Two Knights"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, Symmetrical, Two Knights"]
+
+1.c4 c5 2.Nc3 Nf6 3.Nf3 Nc6 *
+
+[Event "English, Anglo-Indian"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English, Anglo-Indian"]
+
+1.c4 Nf6 2.Nf3 e6 3.g3 *
+
+[Event "Reti, Nimzo-Indian"]
+[Site "Opening Book"]
+[Date "????"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Reti, Nimzo-Indian"]
+
+1.Nf3 Nf6 2.c4 e6 3.g3 d5 4.Bg2 Bb4+ *

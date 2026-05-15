@@ -1,0 +1,11 @@
+[Event "Prometheus Arena"]
+[Site "localhost"]
+[Date "2026.05.14"]
+[Round "1"]
+[White "Luffy"]
+[Black "Prometheus v1"]
+[Result "0-1"]
+[Time "19:05:02"]
+[TimeControl "600"]
+
+1. d4 Nf6 2. Nf3 e6 3. c3 b6 4. Bg5 h6 5. Bh4 d5 6. e3 Be7 7. Bxf6 Bxf6 8. Bd3 c5 9. Nbd2 Nc6 10. Qa4 Qc7 11. Bb5 Bd7 12. Nb3 c4 13. Nbd2 O-O 14. g4 Be7 15. g5 hxg5 16. O-O-O g4 17. Ne5 Nxe5 18. dxe5 Bxb5 19. Qxb5 a6 20. Qa4 Qxe5 21. Rdg1 Qf6 22. Rxg4 Qxf2 23. Qd1 Qxe3 24. Rg3 Qh6 25. Kb1 Bf6 26. Nf3 Qh7+ 27. Ka1 Rad8 28. Ng5 Qh6 29. h4 d4 30. cxd4 Rxd4 31. Qf3 Rd3 32. Qg4 Bxb2+ 33. Kb1 Bf6 34. Qxc4 Rxg3 35. Nxe6 Qd2 36. Qc1 Qb4+ 37. Qb2 Qxb2# 0-1

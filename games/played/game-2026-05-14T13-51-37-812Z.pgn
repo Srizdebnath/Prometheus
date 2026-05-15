@@ -1,0 +1,11 @@
+[Event "Prometheus Arena"]
+[Site "localhost"]
+[Date "2026.05.14"]
+[Round "1"]
+[White "srizpornstar"]
+[Black "Prometheus v1"]
+[Result "0-1"]
+[Time "19:21:37"]
+[TimeControl "600"]
+
+1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qd1 Nf6 5. Nc3 Bb4 6. a3 Bxc3+ 7. bxc3 O-O 8. Qf3 d5 9. exd5 Re8+ 10. Be2 Ne5 11. Qg3 Qxd5 12. Nf3 Nh5 13. Qh4 Nxf3+ 14. gxf3 Qxf3 15. O-O Qxe2 16. Bf4 Qf3 17. Be5 Bh3 18. Qg5 Rxe5 19. Qd8+ Rxd8 20. Rae1 Rg5# 0-1
