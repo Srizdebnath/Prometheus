@@ -13,7 +13,10 @@ async def run_match(prometheus_path, stockfish_path, stockfish_elo, num_games, t
     for i in range(num_games):
         _, prometheus_engine = await chess.engine.popen_uci(prometheus_path)
         _, stockfish_engine = await chess.engine.popen_uci(stockfish_path)
-        await stockfish_engine.configure({"UCI_LimitStrength": True, "UCI_Elo": stockfish_elo})
+        
+        # Stockfish 16 UCI_Elo max is 3190
+        clamped_elo = min(stockfish_elo, 3190)
+        await stockfish_engine.configure({"UCI_LimitStrength": True, "UCI_Elo": clamped_elo})
         
         board = chess.Board()
         
@@ -62,7 +65,7 @@ async def main():
         return
 
     # Levels to test
-    elo_levels = [1500, 1800, 2100, 2400]
+    elo_levels = [1500, 1800, 2100, 2400, 2700, 3000, 3300]
     games_per_level = 6
     time_limit = 0.2 # 200ms per move
     
